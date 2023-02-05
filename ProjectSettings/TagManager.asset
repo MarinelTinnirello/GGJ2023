@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - UICamera
+  - NPC
+  - Enemy
+  - FxTemporaire
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Player
+  - NPC
+  - Enemy
+  - Environment
+  - LevelBounds
+  - PlayerDamageDealer
+  - EnemyDamageDealer
+  - PlayerBlocker
+  - EnemyBlocker
+  - KnockedOut
+  - Trigger
+  - Effects
+  - VCR
+  - Transition
+  - ItemContainer
+  - Items
+  - CameraTrigger
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2696108511
+    locked: 0
+  - name: Characters
+    uniqueID: 3388987875
+    locked: 0
+  - name: Foreground
+    uniqueID: 4062344271
+    locked: 0
+  - name: Effects
+    uniqueID: 348693073
+    locked: 0
+  - name: GUI
+    uniqueID: 2670704149
+    locked: 0
+  - name: VCR
+    uniqueID: 2735294795
+    locked: 0

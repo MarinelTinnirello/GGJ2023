@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f360f06df2348e449bef4cc8b704682, type: 3}
+  m_Name: CharacterLibraryData
+  m_EditorClassIdentifier: 
+  prefabName: 
+  numberOfPrefabsToCreate: 0
+  spawnPoints: []
+  useSpawnEffect: 0
+  activePlayers: 1
+  characterModelTypes:
+  - {fileID: 1442534593560767165, guid: ab5f423c0bcbe2b48b5f48a42d33e16b, type: 3}
+  - {fileID: 129656851399832603, guid: 0e51da376cbd5144b9b73b11a051332e, type: 3}
+  - {fileID: 8729792758883119324, guid: 03f9a77f544dadb49b2ad16ddcaad2cf, type: 3}
+  characterModelSuperTypes: []
+  characterModelHUDImages: []
+  enemyModelTypes:
+  - {fileID: 8729792758883119324, guid: 03f9a77f544dadb49b2ad16ddcaad2cf, type: 3}
+  playerNumNaviHUD: []
