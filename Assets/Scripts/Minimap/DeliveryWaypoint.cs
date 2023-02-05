@@ -125,8 +125,10 @@ public class DeliveryWaypoint : MonoBehaviour
             return;
 
         ObjectiveWaypoint foundObj = waypoints.Find(objective => sender);
-        Destroy(foundObj.rect.gameObject);
-        Destroy(foundObj.path.gameObject);
+        //Destroy(foundObj.rect.gameObject);
+        //Destroy(foundObj.path.gameObject);
+        foundObj.rect.gameObject.SetActive(false);
+        foundObj.path.gameObject.SetActive(true);
         waypoints.Remove(foundObj);
 
         if (waypoints.Count != 0)
@@ -149,37 +151,42 @@ public class DeliveryWaypoint : MonoBehaviour
         offset = offset / camera.orthographicSize * (minimap.rect.width / 2);
         ActiveInstance.rect.anchoredPosition = new Vector2(offset.x, offset.z);
         ActiveInstance.rect.GetComponent<IndicatorMarker>().SetDistanceText(ActiveInstance, player);
-        //WaypointCamera(marker);
+        WaypointCamera(ActiveInstance);
         CheckDistance();
     }
 
     void WaypointCamera(ObjectiveWaypoint marker)
     {
-        Image indicator = marker.rect.GetComponent<Image>();
-        float minX = indicator.GetPixelAdjustedRect().width / 2;
-        float maxX = minimap.rect.width - minX;
-        float minY = indicator.GetPixelAdjustedRect().height / 2;
-        float maxY = minimap.rect.height - minY;
+        //Image indicator = marker.rect.GetComponent<Image>();
+        //float minX = indicator.GetPixelAdjustedRect().width / 2;
+        //float maxX = minimap.rect.width - minX;
+        //float minY = indicator.GetPixelAdjustedRect().height / 2;
+        //float maxY = minimap.rect.height - minY;
 
-        Vector2 newPos = camera.ScreenToWorldPoint(marker.transform.position);
+        //Vector2 newPos = camera.ScreenToWorldPoint(marker.transform.position);
 
-        // check if behind camera
-        if (Vector3.Dot(marker.transform.position - transform.position, transform.forward) < 0)
-        {
-            // target if behind player
-            if (newPos.x < minimap.rect.width / 2)
-            {
-                newPos.x = maxX;
-            }
-            else
-            {
-                newPos.x = minX;
-            }
-        }
+        //// check if behind camera
+        //if (Vector3.Dot(marker.transform.position - transform.position, transform.forward) < 0)
+        //{
+        //    // target if behind player
+        //    if (newPos.x < minimap.rect.width / 2)
+        //    {
+        //        newPos.x = maxX;
+        //    }
+        //    else
+        //    {
+        //        newPos.x = minX;
+        //    }
+        //}
 
-        newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
-        newPos.y = Mathf.Clamp(newPos.y, minY, maxY);
+        //newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
+        //newPos.y = Mathf.Clamp(newPos.y, minY, maxY);
 
-        indicator.transform.position = newPos;
+        //indicator.transform.position = newPos;
+
+        marker.transform.position = new Vector3(
+            Mathf.Clamp(marker.transform.position.x, camera.transform.position.x - minimap.rect.width, camera.transform.position.x + minimap.rect.width),
+            marker.transform.position.y,
+            Mathf.Clamp(marker.transform.position.z, camera.transform.position.z - minimap.rect.height, camera.transform.position.z + minimap.rect.height));
     }
 }
