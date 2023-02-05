@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 3565116e7b63bc248b716a54738745b7, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b7d9e474251b0814e92e6c719f24df57, type: 2}
 --- !u!1 &17864781
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,6 +885,11 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!20 &663336401 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7210756225187979604, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
+  m_PrefabInstance: {fileID: 4567584768736014881}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &667611724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1282,7 @@ PrefabInstance:
     - target: {fileID: 6371829098177510126, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 854726334}
+      objectReference: {fileID: 663336401}
     - target: {fileID: 6371829098177510126, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
       propertyPath: player
       value: 
@@ -1285,6 +1290,10 @@ PrefabInstance:
     - target: {fileID: 6371829099238987052, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
       propertyPath: m_Name
       value: Canvas - Minimap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371829099238987052, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6371829099238987056, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
       propertyPath: m_Pivot.x
@@ -1433,11 +1442,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7513504585586580091, guid: c130b9906be581049ba5882a6d91d8c8, type: 3}
   m_PrefabInstance: {fileID: 842281817}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &854726334 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 5798394604499072952, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
-  m_PrefabInstance: {fileID: 4567584768736014881}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &918697800 stripped
 GameObject:
@@ -3414,6 +3418,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 335867728283108074, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4567584769810444258, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
       propertyPath: voiceOverAudioSource
       value: 

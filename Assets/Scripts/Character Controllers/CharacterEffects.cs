@@ -44,8 +44,11 @@ public class CharacterEffects : MonoBehaviour
             //footStepLoopY = footStepLoopPS.gameObject.transform.localPosition.y;
         }
 
-        //for (int i = 0; i < dustTailPS.Length; i++)
-        //    dustTailPSMain[i] = dustTailPS[i].main;
+        /*for (int i = 0; i < dustTailPS.Length; i++)
+        {
+            dustTailPSMain[i] = dustTailPS[i].main;
+        }*/
+            
     }
 
     private void Update()

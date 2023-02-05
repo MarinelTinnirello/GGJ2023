@@ -18,6 +18,8 @@ public class CarController : CharacterTrigger
     public float gravity = -100f;//-9.81f;
     public bool canJump = true;
     private float dashAmmount = 1f;
+    [Space]
+    public GameObject[] enableOnMove;
 
     private float horizontal;
     private float vertical;
@@ -35,6 +37,7 @@ public class CarController : CharacterTrigger
     private bool isDashing;
 
     private bool inputEnabled = true;
+    private bool wasMoving;
 
     public override void Start()
     {
@@ -125,6 +128,8 @@ public class CarController : CharacterTrigger
             RotateTowardsMovementDir();
         }
 
+        OnIsMovingChange();
+
         base.Update();
 
         characterEffects?.EnableDustTrail(isMoving && isGrounded);
@@ -133,6 +138,20 @@ public class CarController : CharacterTrigger
     public void OnCameraChange(float cameraAngle)
     {
         characterAnimationController?.SetFloat("CameraAngle", cameraAngle);
+    }
+
+    public void OnIsMovingChange()
+    {
+        if(isMoving != wasMoving)
+        {
+
+            for (int i = 0; i < enableOnMove.Length; i++)
+            {
+                enableOnMove[i].SetActive(isMoving);
+            }
+
+            wasMoving = isMoving;
+        }
     }
 
     public Vector3 MovementInput

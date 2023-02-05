@@ -112,8 +112,8 @@ public class DeliveryWaypoint : MonoBehaviour
 
     public void AddObjectivePoint(ObjectiveWaypoint sender)
     {
-        RectTransform rect = Instantiate(markerPrefab, minimap).GetComponent<RectTransform>();
-        sender.rect = rect;
+        //RectTransform rect = Instantiate(markerPrefab, minimap).GetComponent<RectTransform>();
+        //sender.rect = rect;
         LineRenderer path = Instantiate(sender.path, sender.transform).GetComponent<LineRenderer>();
         sender.path = path;
         waypoints.Add(sender);
@@ -127,7 +127,7 @@ public class DeliveryWaypoint : MonoBehaviour
         ObjectiveWaypoint foundObj = waypoints.Find(objective => sender);
         //Destroy(foundObj.rect.gameObject);
         //Destroy(foundObj.path.gameObject);
-        foundObj.rect.gameObject.SetActive(false);
+        //foundObj.rect.gameObject.SetActive(false);
         foundObj.path.gameObject.SetActive(true);
         waypoints.Remove(foundObj);
 
@@ -149,9 +149,10 @@ public class DeliveryWaypoint : MonoBehaviour
 
         Vector3 offset = Vector3.ClampMagnitude(ActiveInstance.transform.position - player.transform.position, camera.orthographicSize);
         offset = offset / camera.orthographicSize * (minimap.rect.width / 2);
-        ActiveInstance.rect.anchoredPosition = new Vector2(offset.x, offset.z);
-        ActiveInstance.rect.GetComponent<IndicatorMarker>().SetDistanceText(ActiveInstance, player);
-        WaypointCamera(ActiveInstance);
+        //ActiveInstance.rect.anchoredPosition = new Vector2(offset.x, offset.z);
+        //ActiveInstance.rect.GetComponent<IndicatorMarker>().SetDistanceText(ActiveInstance, player);
+        //WaypointCamera(ActiveInstance);
+        //ActiveInstance.WaypointCamera(camera);
         CheckDistance();
     }
 
@@ -183,10 +184,5 @@ public class DeliveryWaypoint : MonoBehaviour
         //newPos.y = Mathf.Clamp(newPos.y, minY, maxY);
 
         //indicator.transform.position = newPos;
-
-        marker.transform.position = new Vector3(
-            Mathf.Clamp(marker.transform.position.x, camera.transform.position.x - minimap.rect.width, camera.transform.position.x + minimap.rect.width),
-            marker.transform.position.y,
-            Mathf.Clamp(marker.transform.position.z, camera.transform.position.z - minimap.rect.height, camera.transform.position.z + minimap.rect.height));
     }
 }
