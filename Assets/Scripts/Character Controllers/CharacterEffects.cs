@@ -16,6 +16,11 @@ public class CharacterEffects : MonoBehaviour
     public float footStepLoopY;
     private bool footLoopActive;
 
+    [Space]
+    public ParticleSystem[] dustTailPS;
+    private ParticleSystem.MainModule[] dustTailPSMain;
+    private bool dustTrailActive;
+
     //[Space, Tooltip("Trail to enable when character is dashing")]
     //public SpriteTrail.SpriteTrail dashTrail;
 
@@ -38,6 +43,9 @@ public class CharacterEffects : MonoBehaviour
             footStepLoop = footStepLoopPS.main;
             //footStepLoopY = footStepLoopPS.gameObject.transform.localPosition.y;
         }
+
+        for (int i = 0; i < dustTailPS.Length; i++)
+            dustTailPSMain[i] = dustTailPS[i].main;
     }
 
     private void Update()
@@ -70,6 +78,29 @@ public class CharacterEffects : MonoBehaviour
         footStepLoopPS.Stop();
 
         footLoopActive = false;
+    }
+
+    public void EnableDustTrail(bool _state)
+    {
+        //if (dustTailPS.Length < 1 || dustTailPSMain.Length < 1) return;
+
+        for (int i = 0; i < dustTailPS.Length; i++)
+        {
+            if (_state)
+            {
+                dustTailPS[i].Play();
+                //dustTailPSMain[i].loop = _state;
+
+                dustTrailActive = _state;
+            }
+            else
+            {
+                dustTailPS[i].Stop();
+                //dustTailPSMain[i].loop = _state;
+
+                dustTrailActive = _state;
+            }
+        }
     }
 
     public void OnTransform(int powerTypeID = 0, float activeTime = 10f)

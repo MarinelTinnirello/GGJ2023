@@ -27,7 +27,7 @@ public class CarController : CharacterTrigger
     [Header("Power Up Setup")]
     public CharacterPowerTypes currentPowerType;
     public bool enableRotationTimer = true;
-
+     
     private float changePowerTime = 10f;
 
     private bool jumpCalled;
@@ -35,8 +35,6 @@ public class CarController : CharacterTrigger
     private bool isDashing;
 
     private bool inputEnabled = true;
-
-    public Animator animator;
 
     public override void Start()
     {
@@ -128,15 +126,14 @@ public class CarController : CharacterTrigger
         }
 
         base.Update();
+
+        characterEffects?.EnableDustTrail(isMoving && isGrounded);
     }
 
     public void OnCameraChange(float cameraAngle)
     {
-        if (!animator) return;
-        animator.SetFloat("CameraAngle", cameraAngle);
+        characterAnimationController?.SetFloat("CameraAngle", cameraAngle);
     }
-
-
 
     public Vector3 MovementInput
     {

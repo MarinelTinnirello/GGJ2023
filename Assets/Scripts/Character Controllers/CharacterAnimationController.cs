@@ -29,7 +29,6 @@ public class CharacterAnimationController : MonoBehaviour
 
     [Space]
     public HeadLookController headLookAt;
-    public DynamicBone hairMovement;
 
     private readonly string animatorLabelAnimationStateID = "StateID";
     private readonly string animatorLabelAttackID = "AttackID";
@@ -97,11 +96,6 @@ public class CharacterAnimationController : MonoBehaviour
         characterAnimator?.SetFloat("Velocity X", Mathf.Abs(horizontal));// transform.InverseTransformDirection(GetVelocity()).x);
         characterAnimator?.SetFloat("Velocity Y", characterInputController ? characterInputController.velocity.y : 0f);
         characterAnimator?.SetFloat("Velocity Z", Mathf.Abs(vertical));// transform.InverseTransformDirection(GetVelocity()).z);
-
-        if (hairMovement)
-        {
-            hairMovement.enabled = characterInputController ? characterInputController.velocity.y > 0f ? false : true : true;
-        }
     }
 
     private Vector3 GetVelocity()
@@ -113,6 +107,9 @@ public class CharacterAnimationController : MonoBehaviour
 
     public void Movement(float h, float v)
     {
+        if (horizontal != h) SetFloat("horizontal", h);
+        if (vertical != v) SetFloat("vertical", v);
+
         horizontal = h;
         vertical = v;
     }
@@ -160,7 +157,25 @@ public class CharacterAnimationController : MonoBehaviour
 
         characterAnimator?.SetFloat(animatorLabelMoveSpeed, moveSpeed);
 
-        print("_speed = " + _speed);
+        //print("_speed = " + _speed);
+    }
+
+    public void SetFloat(string _label, float _value )
+    {
+        if (!characterAnimator) return;
+        characterAnimator?.SetFloat(_label, _value);
+    }
+
+    public void SetInteger(string _label, int _value)
+    {
+        if (!characterAnimator) return;
+        characterAnimator?.SetInteger(_label, _value);
+    }
+
+    public void SetBool(string _label, bool _value)
+    {
+        if (!characterAnimator) return;
+        characterAnimator?.SetBool(_label, _value);
     }
 
     public void SetNearGroundState(bool _state)

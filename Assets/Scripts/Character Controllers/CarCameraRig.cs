@@ -19,8 +19,10 @@ public class CarCameraRig : CameraRig
 
     private Transform target;
 
-    private int angleCheckCount = 40;
+    private int angleCheckCount = 100;
     private int currentAngleCheckCount = 0;
+
+    public bool isActive = true;
 
     // Start is called before the first frame update
     private void Start()
@@ -34,22 +36,23 @@ public class CarCameraRig : CameraRig
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
+        if (isActive) base.Update();
 
         if (!mainCamera || target == null) return;
         mainCamera.transform.LookAt(target);
 
         //transform.position = target.transform.position + cameraOffset;
-    //}
+    }
 
-    //public override void LateUpdate()
-    //{
-        //base.LateUpdate();
+    public override void LateUpdate()
+    {
+        if (isActive) base.LateUpdate();
 
         //Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Ray ray = new Ray(mainCamera.transform.position, target.transform.position - mainCamera.transform.position);
         RaycastHit raycastHit;
         bool raycastHitTarget = Physics.Raycast(ray, out raycastHit, Mathf.Infinity, cameraTriggerLayers);
+        //bool raycastHitTarget = Physics.SphereCast(mainCamera.transform.position, 0.1f, target.transform.position, out raycastHit, Mathf.Infinity, cameraTriggerLayers);
 
         if (raycastHitTarget)
         {
@@ -58,7 +61,7 @@ public class CarCameraRig : CameraRig
             //Vector3 localHit = target.transform.InverseTransformPoint(raycastHit.point);
             //print(localHit);
 
-            //Debug.Log(raycastHit.transform.name + " got hit at: " + target.transform.InverseTransformPoint(raycastHit.point));
+            Debug.Log(raycastHit.transform.name + " got hit at: " + target.transform.InverseTransformPoint(raycastHit.point));
         }
 
 
@@ -69,11 +72,11 @@ public class CarCameraRig : CameraRig
         }
 
         //print("Camera = " + mainCamera.transform.forward + " ||  Target = " + target.transform.forward);
-        //print(mainCamera.transform.forward - target.transform.forward);
 
         //Vector3 relative;
         //relative = mainCamera.transform.InverseTransformDirection(target.transform.forward);
         //Debug.Log( Math.Round(relative.z, 2) );
+
 
         OnCameraUpdate();
     }
@@ -129,14 +132,14 @@ public class CarCameraRig : CameraRig
                 return;
         }
 
-        if (lastCameraAngle == currentCameraAngle) return;
+        //if (lastCameraAngle == currentCameraAngle) return;
 
-        if (!CheckIsValid()) return;
+        //if (!CheckIsValid()) return;
 
         lastCameraAngle = currentCameraAngle;
         currentAngleCheckCount = 0;
 
-        print(currentCameraAngle);
+        //print(currentCameraAngle);
 
         carController?.OnCameraChange(currentCameraAngle);
     }

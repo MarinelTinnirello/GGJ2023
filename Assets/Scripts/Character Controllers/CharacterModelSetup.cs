@@ -7,7 +7,6 @@ public struct CharacterModelSettings
 {
     public Animator animator;
     public Transform centerPoint;
-    public DynamicBone hairMovement;
     public HeadLookController headLookAt;
     public GameObject onKnockOutPrefab;
     public Weapon[] weapons;

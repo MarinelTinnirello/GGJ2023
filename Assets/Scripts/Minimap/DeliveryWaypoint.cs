@@ -14,30 +14,34 @@ public class DeliveryWaypoint : MonoBehaviour
     [Header("Prefabs")]
     public ObjectiveWaypoint objectivePrefab;
     public GameObject markerPrefab;
-    private List<ObjectiveWaypoint> waypoints;
+    List<ObjectiveWaypoint> waypoints;
     public GameObject player;
-    private ObjectiveWaypoint ActiveInstance;
+    public ObjectiveWaypoint ActiveInstance;
 
     [Header("Controllers")]
     [SerializeField]
-    private float PathHeightOffset = 1.25f;
+    float PathHeightOffset = 1.25f;
     [SerializeField]
-    private float PathUpdateSpeed = 0.25f;
+    float PathUpdateSpeed = 0.25f;
     [SerializeField]
-    private float SpawnHeightOffset = 1.5f;
-    private NavMeshTriangulation Triangulation;
-    private Coroutine DrawPathCoroutine;
+    float SpawnHeightOffset = 1.5f;
+    [SerializeField]
+    float nearestDistance = 10000;
+    ObjectiveWaypoint nearestObj;
+
+    NavMeshTriangulation Triangulation;
+    Coroutine DrawPathCoroutine;
     #endregion
 
     private void Awake()
     {
+        waypoints = new List<ObjectiveWaypoint>();
+
         Triangulation = NavMesh.CalculateTriangulation();
     }
 
     void Start()
     {
-        waypoints = new List<ObjectiveWaypoint>();
-
         StartDrawingPath();
     }
 
@@ -48,9 +52,10 @@ public class DeliveryWaypoint : MonoBehaviour
 
     public void StartDrawingPath()
     {
-        ActiveInstance = Instantiate(objectivePrefab,
-            Triangulation.vertices[Random.Range(0, Triangulation.vertices.Length)] + Vector3.up * SpawnHeightOffset,
-            Quaternion.Euler(90, 0, 0));
+        //ActiveInstance = Instantiate(objectivePrefab,
+        //    Triangulation.vertices[Random.Range(0, Triangulation.vertices.Length)] + Vector3.up * SpawnHeightOffset,
+        //    Quaternion.Euler(90, 0, 0));
+        ActiveInstance = waypoints[0];
 
         if (DrawPathCoroutine != null)
         {
@@ -87,9 +92,20 @@ public class DeliveryWaypoint : MonoBehaviour
 
     void CheckDistance()
     {
+        for (int i = 0; i < waypoints.Count; i++)
+        {
+            float distance = Vector3.Distance(ActiveInstance.transform.position, player.transform.position);
+            if (distance < nearestDistance)
+            {
+                nearestObj = waypoints[i];
+                nearestDistance = distance;
+            }
+        }
+
+        ActiveInstance = nearestObj;
+
         if (Vector3.Distance(ActiveInstance.transform.position, player.transform.position) < ActiveInstance.metersAway)
         {
-            StopCoroutine(DrawPathCoroutine);
             RemoveObjectivePoint(ActiveInstance);
         }
     }
@@ -112,19 +128,29 @@ public class DeliveryWaypoint : MonoBehaviour
         Destroy(foundObj.rect.gameObject);
         Destroy(foundObj.path.gameObject);
         waypoints.Remove(foundObj);
+
+        if (waypoints.Count != 0)
+            ActiveInstance = waypoints[0];
     }
 
     void ShowMarkerDistance()
     {
-        foreach (ObjectiveWaypoint marker in waypoints)
-        {
-            Vector3 offset = Vector3.ClampMagnitude(marker.transform.position - player.transform.position, camera.orthographicSize);
-            offset = offset / camera.orthographicSize * (minimap.rect.width / 2);
-            marker.rect.anchoredPosition = new Vector2(offset.x, offset.z);
-            marker.rect.GetComponent<IndicatorMarker>().SetDistanceText(marker, player);
-            //WaypointCamera(marker);
-            CheckDistance();
-        }
+        //foreach (ObjectiveWaypoint marker in waypoints)
+        //{
+        //    Vector3 offset = Vector3.ClampMagnitude(marker.transform.position - player.transform.position, camera.orthographicSize);
+        //    offset = offset / camera.orthographicSize * (minimap.rect.width / 2);
+        //    marker.rect.anchoredPosition = new Vector2(offset.x, offset.z);
+        //    marker.rect.GetComponent<IndicatorMarker>().SetDistanceText(marker, player);
+        //    //WaypointCamera(marker);
+        //    CheckDistance();
+        //}
+
+        Vector3 offset = Vector3.ClampMagnitude(ActiveInstance.transform.position - player.transform.position, camera.orthographicSize);
+        offset = offset / camera.orthographicSize * (minimap.rect.width / 2);
+        ActiveInstance.rect.anchoredPosition = new Vector2(offset.x, offset.z);
+        ActiveInstance.rect.GetComponent<IndicatorMarker>().SetDistanceText(ActiveInstance, player);
+        //WaypointCamera(marker);
+        CheckDistance();
     }
 
     void WaypointCamera(ObjectiveWaypoint marker)

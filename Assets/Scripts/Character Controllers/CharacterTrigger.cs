@@ -291,7 +291,6 @@ public class CharacterTrigger : MonoBehaviour
         {
             characterAnimationController.characterAnimator = modelSettings.animator;
             characterAnimationController.headLookAt = modelSettings.headLookAt;
-            characterAnimationController.hairMovement = modelSettings.hairMovement;
             
             if (characterAnimationController.characterAnimator){
                 leftFoot = !leftFoot ? characterAnimationController.characterAnimator.GetBoneTransform(HumanBodyBones.LeftFoot) : leftFoot;
