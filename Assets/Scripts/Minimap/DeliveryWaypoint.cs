@@ -58,7 +58,6 @@ public class DeliveryWaypoint : MonoBehaviour
         }
 
         DrawPathCoroutine = StartCoroutine(DrawPathToObjective());
-        StartCoroutine(CheckDistance());
     }
 
     IEnumerator DrawPathToObjective()
@@ -86,11 +85,8 @@ public class DeliveryWaypoint : MonoBehaviour
         }
     }
 
-    IEnumerator CheckDistance()
+    void CheckDistance()
     {
-        WaitForSeconds Wait = new WaitForSeconds(PathUpdateSpeed);
-        yield return Wait;
-
         if (Vector3.Distance(ActiveInstance.transform.position, player.transform.position) < ActiveInstance.metersAway)
         {
             StopCoroutine(DrawPathCoroutine);
@@ -104,7 +100,7 @@ public class DeliveryWaypoint : MonoBehaviour
         sender.rect = rect;
         LineRenderer path = Instantiate(sender.path, sender.transform).GetComponent<LineRenderer>();
         sender.path = path;
-        waypoints.Add((sender));
+        waypoints.Add(sender);
     }
 
     public void RemoveObjectivePoint(ObjectiveWaypoint sender)
@@ -127,6 +123,7 @@ public class DeliveryWaypoint : MonoBehaviour
             marker.rect.anchoredPosition = new Vector2(offset.x, offset.z);
             marker.rect.GetComponent<IndicatorMarker>().SetDistanceText(marker, player);
             //WaypointCamera(marker);
+            CheckDistance();
         }
     }
 
