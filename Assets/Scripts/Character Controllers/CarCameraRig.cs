@@ -61,7 +61,7 @@ public class CarCameraRig : CameraRig
             //Vector3 localHit = target.transform.InverseTransformPoint(raycastHit.point);
             //print(localHit);
 
-            Debug.Log(raycastHit.transform.name + " got hit at: " + target.transform.InverseTransformPoint(raycastHit.point));
+            //Debug.Log(raycastHit.transform.name + " got hit at: " + target.transform.InverseTransformPoint(raycastHit.point));
         }
 
 

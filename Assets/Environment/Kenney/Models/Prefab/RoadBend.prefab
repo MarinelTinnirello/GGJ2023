@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5645221610222704352}
   - component: {fileID: 1509435532369719955}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: BoundsA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5645221610222704352
 Transform:
@@ -54,12 +54,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3215588848612883475}
   - component: {fileID: 2074717804243813777}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: BoundsC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3215588848612883475
 Transform:
@@ -99,12 +99,13 @@ GameObject:
   - component: {fileID: 7100182887425391516}
   - component: {fileID: 6135927043629724729}
   - component: {fileID: 8269671503936864499}
-  m_Layer: 0
+  - component: {fileID: -4805072264880427141}
+  m_Layer: 11
   m_Name: RoadBend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7100182887425391516
 Transform:
@@ -175,6 +176,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-4805072264880427141
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620998882750390566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8439104543645927819, guid: 37c8bbba084f2344ba11a218bb58e0b0, type: 3}
 --- !u!1 &9097727003905056380
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,12 +200,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2014081976304772709}
   - component: {fileID: 1796514229609686003}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: BoundsB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &2014081976304772709
 Transform:

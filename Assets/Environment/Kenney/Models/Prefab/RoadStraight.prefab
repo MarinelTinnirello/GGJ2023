@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 896636752755589744}
   - component: {fileID: 4314067964795129301}
   - component: {fileID: 2034029153020377375}
-  - component: {fileID: 247000489214869387}
-  m_Layer: 0
+  - component: {fileID: -6301150030325736310}
+  m_Layer: 11
   m_Name: RoadStraight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &896636752755589744
 Transform:
@@ -87,7 +87,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &247000489214869387
+--- !u!64 &-6301150030325736310
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,12 +111,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3173045880963867124}
   - component: {fileID: 5683435479172073}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: BoundsB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3173045880963867124
 Transform:
@@ -126,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2714954995399932391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: -0.437}
+  m_LocalPosition: {x: 0, y: 0.25, z: -0.35}
   m_LocalScale: {x: 1, y: 0.5, z: 0.1}
   m_Children: []
   m_Father: {fileID: 896636752755589744}
@@ -155,12 +155,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4865972988480830912}
   - component: {fileID: 8843097336983319667}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: BoundsA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4865972988480830912
 Transform:
@@ -170,7 +170,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4329620276047258885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0.442}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0.35}
   m_LocalScale: {x: 1, y: 0.5, z: 0.1}
   m_Children: []
   m_Father: {fileID: 896636752755589744}

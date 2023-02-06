@@ -47,6 +47,7 @@ public class CharacterAnimationController : MonoBehaviour
 
     [HideInInspector]
     public float moveSpeed, horizontal, vertical = 0f;
+    private float lastHorizontal, lastVertical;
 
     [HideInInspector]
     public bool isGrounded, isNearGround = true;
@@ -105,13 +106,18 @@ public class CharacterAnimationController : MonoBehaviour
         return Vector3.zero;
     }
 
-    public void Movement(float h, float v)
+    public void Movement(float h, float v, bool _ignoreIfIdle = false)
     {
-        if (horizontal != h) SetFloat("horizontal", h);
-        if (vertical != v) SetFloat("vertical", v);
-
         horizontal = h;
         vertical = v;
+
+        if (h == 0 && v == 0 && _ignoreIfIdle) return;
+
+        if (lastHorizontal != h) SetFloat("horizontal", h);
+        if (lastVertical != v) SetFloat("vertical", v);
+
+        lastHorizontal= h;
+        lastVertical = v;
     }
 
     public void SmoothHaltMovement()

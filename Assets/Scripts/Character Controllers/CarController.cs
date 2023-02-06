@@ -18,9 +18,7 @@ public class CarController : CharacterTrigger
     public float gravity = -100f;//-9.81f;
     public bool canJump = true;
     private float dashAmmount = 1f;
-    [Space]
-    public GameObject[] enableOnMove;
-
+    
     private float horizontal;
     private float vertical;
 
@@ -37,7 +35,6 @@ public class CarController : CharacterTrigger
     private bool isDashing;
 
     private bool inputEnabled = true;
-    private bool wasMoving;
 
     public override void Start()
     {
@@ -57,6 +54,8 @@ public class CarController : CharacterTrigger
         if (!GameManager.Instance) StartPowerChangeTimer(8.0f, 10.0f);
 
         characterAnimationController?.SetCharacterController(characterController);
+
+        EnableMoveObjects(false);
 
         base.Start();
     }
@@ -115,7 +114,7 @@ public class CarController : CharacterTrigger
             characterAnimationController?.SetSpeed(moveSpeed * 0.1f);
         }
 
-        characterAnimationController?.Movement(horizontal, vertical);
+        characterAnimationController?.Movement(horizontal, vertical, true);
 
         velocity.y += gravity * Time.deltaTime;
         characterController?.Move(velocity * Time.deltaTime);
@@ -138,20 +137,6 @@ public class CarController : CharacterTrigger
     public void OnCameraChange(float cameraAngle)
     {
         characterAnimationController?.SetFloat("CameraAngle", cameraAngle);
-    }
-
-    public void OnIsMovingChange()
-    {
-        if(isMoving != wasMoving)
-        {
-
-            for (int i = 0; i < enableOnMove.Length; i++)
-            {
-                enableOnMove[i].SetActive(isMoving);
-            }
-
-            wasMoving = isMoving;
-        }
     }
 
     public Vector3 MovementInput

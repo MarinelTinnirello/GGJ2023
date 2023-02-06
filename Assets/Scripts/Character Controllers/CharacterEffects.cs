@@ -6,8 +6,11 @@ public class CharacterEffects : MonoBehaviour
 {
     public Transform centerPoint;
     [Space, Space]
-    public GameObject OnHitPrefab;
+    public GameObject onHitPrefab;
+    public GameObject onLandPrefab;
     public GameObject transformationEffect;
+    public GameObject[] enableOnRun;
+    private bool runObjectsOn;
 
     [Tooltip("Effect prefab to instantiate on character step.")]
     public GameObject FootStepPrefab;
@@ -20,6 +23,10 @@ public class CharacterEffects : MonoBehaviour
     public ParticleSystem[] dustTailPS;
     private ParticleSystem.MainModule[] dustTailPSMain;
     private bool dustTrailActive;
+
+
+    [Space]
+    public GameObject shadow;
 
     //[Space, Tooltip("Trail to enable when character is dashing")]
     //public SpriteTrail.SpriteTrail dashTrail;
@@ -48,7 +55,8 @@ public class CharacterEffects : MonoBehaviour
         {
             dustTailPSMain[i] = dustTailPS[i].main;
         }*/
-            
+
+        EnableObjectsOnRun(false, true);
     }
 
     private void Update()
@@ -65,20 +73,37 @@ public class CharacterEffects : MonoBehaviour
             if (!footLoopActive && footStepLoopPS)
             {
                 footStepLoopPS.Play();
-                footStepLoop.loop = true;
+                //footStepLoop.loop = true;
 
                 footLoopActive = true;
             }
         } else
         {
-            //EndFootStepPS();
+            EndFootStepPS();
         }
+
+        EnableObjectsOnRun(characterAnimationController.isRunning);
+    }
+
+    public void EnableObjectsOnRun(bool _state, bool forceUpdate = false)
+    {
+        if (runObjectsOn == _state && !forceUpdate) return;
+
+        for (int i = 0; i < enableOnRun.Length; i++)
+        {
+            enableOnRun[i].SetActive(_state);
+        }
+
+        runObjectsOn = _state;
     }
 
     public void EndFootStepPS()
     {
-        footStepLoop.loop = false;
-        footStepLoopPS.Stop();
+        if (footStepLoopPS)
+        {
+            //footStepLoop.loop = false;
+            footStepLoopPS?.Stop();
+        }
 
         footLoopActive = false;
     }
@@ -138,7 +163,22 @@ public class CharacterEffects : MonoBehaviour
 
     public void OnHit()
     {
-        InstantiateEffectAtCenterPoint(OnHitPrefab);
+        InstantiateEffectAtCenterPoint(onHitPrefab);
+    }
+
+    public void OnGroundStateChange(bool _isGrounded)
+    {
+        if (shadow)
+        {
+            shadow.SetActive(_isGrounded);
+        }
+
+        if (_isGrounded) OnLand();
+    }
+
+    public void OnLand()
+    {
+        AddEffect(onLandPrefab, false);
     }
 
     public void OnFootStep(Vector3 position)

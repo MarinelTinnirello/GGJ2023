@@ -14,7 +14,7 @@ public class DeliveryWaypoint : MonoBehaviour
     [Header("Prefabs")]
     public ObjectiveWaypoint objectivePrefab;
     public GameObject markerPrefab;
-    List<ObjectiveWaypoint> waypoints;
+    public List<ObjectiveWaypoint> waypoints;
     public GameObject player;
     public ObjectiveWaypoint ActiveInstance;
 
@@ -33,7 +33,7 @@ public class DeliveryWaypoint : MonoBehaviour
     Coroutine DrawPathCoroutine;
     #endregion
 
-    private void Awake()
+    void Awake()
     {
         waypoints = new List<ObjectiveWaypoint>();
 

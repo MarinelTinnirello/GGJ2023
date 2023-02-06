@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 377926824}
-  m_IndirectSpecularColor: {r: 0.13769872, g: 0.11570898, b: 0.2174859, a: 1}
+  m_IndirectSpecularColor: {r: 0.254889, g: 0.19565758, b: 0.37640095, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3066,6 +3066,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085ac3fb964fbca458ab07414af1b549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1912502117 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3355375146122894819, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
+  m_PrefabInstance: {fileID: 686158020}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1921427243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3163,6 +3168,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6371829098177510126, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1912502117}
     - target: {fileID: 6371829099238987052, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
       propertyPath: m_Name
       value: Canvas - Minimap

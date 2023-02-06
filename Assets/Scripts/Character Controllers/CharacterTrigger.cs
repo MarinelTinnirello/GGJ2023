@@ -10,8 +10,7 @@ public class CharacterTrigger : MonoBehaviour
     public CharacterVariantController characterVariantController;
     public LayerMask groundCheckLayers;
     [HideInInspector]
-    public bool isGrounded, isNearGround, isHumanoid, characterIsSetup;
-    private bool wasGrounded, wasNearGround;
+    public bool isGrounded, isNearGround, isHumanoid, characterIsSetup, wasGrounded, wasNearGround;
     [HideInInspector]
     public CharacterSetup characterSetupController;
 
@@ -22,6 +21,8 @@ public class CharacterTrigger : MonoBehaviour
     public CharacterAnimationController characterAnimationController;
     public GameObject defaultDisplayObject;
     public GameObject onKnockOutDisplayObject;
+    [Space]
+    public GameObject[] enableOnMove;
     [Space]
     public bool hideDefaultDisplayOnKO = true;
 
@@ -211,10 +212,12 @@ public class CharacterTrigger : MonoBehaviour
         
         if (wasGrounded == isGrounded) return;
 
+        characterEffects?.OnGroundStateChange(isGrounded);
         characterAnimationController?.SetGroundState(isGrounded);
 
         if (isGrounded)
         {
+            //land
             //if (umbrellaIsOpen) playerCharacterController?.characterAudioController?.PlaySoundEffect("FootStepLand");
         }
 
@@ -230,6 +233,20 @@ public class CharacterTrigger : MonoBehaviour
         if (wasRunning == isRunning) return;
         characterAnimationController?.SetRunState(isRunning);
         wasRunning = isRunning;
+    }
+
+    public virtual void OnIsMovingChange()
+    {
+        if (isMoving != wasMoving)
+        {
+            EnableMoveObjects(isMoving);
+            wasMoving = isMoving;
+        }
+    }
+
+    public virtual void EnableMoveObjects(bool _state)
+    {
+        for (int i = 0; i < enableOnMove.Length; i++) enableOnMove[i].SetActive(_state);
     }
 
     public virtual IEnumerator OnAttack(float duration, float attackResetTime)
