@@ -28,6 +28,7 @@ public class DeliveryWaypoint : MonoBehaviour
     [SerializeField]
     float nearestDistance = 10000;
     ObjectiveWaypoint nearestObj;
+    bool waypointsReady;
 
     NavMeshTriangulation Triangulation;
     Coroutine DrawPathCoroutine;
@@ -50,11 +51,22 @@ public class DeliveryWaypoint : MonoBehaviour
         ShowMarkerDistance();
     }
 
+    public void AssignMinimapCamera(Camera _camera)
+    {
+        camera = _camera;
+    }
+
     public void StartDrawingPath()
     {
         //ActiveInstance = Instantiate(objectivePrefab,
         //    Triangulation.vertices[Random.Range(0, Triangulation.vertices.Length)] + Vector3.up * SpawnHeightOffset,
         //    Quaternion.Euler(90, 0, 0));
+        if (waypoints.Count < 1)
+        {
+            Debug.Log("nothing in the list");
+            return;
+        }
+
         ActiveInstance = waypoints[0];
 
         if (DrawPathCoroutine != null)
@@ -63,6 +75,8 @@ public class DeliveryWaypoint : MonoBehaviour
         }
 
         DrawPathCoroutine = StartCoroutine(DrawPathToObjective());
+
+        waypointsReady = true;
     }
 
     IEnumerator DrawPathToObjective()
@@ -146,6 +160,9 @@ public class DeliveryWaypoint : MonoBehaviour
         //    //WaypointCamera(marker);
         //    CheckDistance();
         //}
+
+        if (!waypointsReady)
+            return;
 
         Vector3 offset = Vector3.ClampMagnitude(ActiveInstance.transform.position - player.transform.position, camera.orthographicSize);
         offset = offset / camera.orthographicSize * (minimap.rect.width / 2);

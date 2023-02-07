@@ -456,10 +456,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1578297834947638226, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1140301255}
     - target: {fileID: 6371829098177510126, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 4567584768736014882}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371829098397499627, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4a7c15b21adfdee4580c8a2a0e542302, type: 3}
     - target: {fileID: 6371829099238987052, guid: 510c0dcd4fcd74948a54c42240eaf69f, type: 3}
       propertyPath: m_Name
       value: Canvas - Minimap
@@ -5094,7 +5102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4567584769810444263, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 1.630005
       objectReference: {fileID: 0}
     - target: {fileID: 4567584769810444263, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5130,11 +5138,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
---- !u!20 &4567584768736014882 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3355375146122894819, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
-  m_PrefabInstance: {fileID: 4567584768736014881}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6950348716286736937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4027678789677810449, guid: 17e61ddf388ecd048bca919cef5dcc8f, type: 3}

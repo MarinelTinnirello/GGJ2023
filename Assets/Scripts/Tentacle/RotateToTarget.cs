@@ -7,12 +7,28 @@ public class RotateToTarget : MonoBehaviour
     #region Variables
     public bool rotateToCursor = true;
 
-    public float rotationSpeed;
+    public float rotationSpeed = 25f;
     private Vector3 direction;
-    public float moveSpeed;
+    public float moveSpeed = 10f;
 
-    public Transform target;
+    public Transform lookAtTarget;
+    public Transform objToRotate;
+    [Space]
+    public Camera camera;
     #endregion
+
+    void Start()
+    {
+        if (!objToRotate)
+            objToRotate = transform;
+        if (!camera)
+            camera = Camera.main;
+    }
+
+    public void AssignTarget(Transform _target)
+    {
+        lookAtTarget = _target;
+    }
 
     void Update()
     {
@@ -29,30 +45,40 @@ public class RotateToTarget : MonoBehaviour
 
     void RotateObjCursor()
     {
+        if (!lookAtTarget)
+            return;
+
         // Convert mouse to 3D space to accomodate the camera
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane;
+        mousePos.z = camera.nearClipPlane;
 
-        direction = Camera.main.ScreenToWorldPoint(mousePos) - transform.position;
+        direction = camera.ScreenToWorldPoint(mousePos) - objToRotate.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+        objToRotate.rotation = Quaternion.Slerp(objToRotate.rotation, rotation, rotationSpeed * Time.deltaTime);
     }
 
     void MoveTowardCursor()
     {
+        if (!lookAtTarget)
+            return;
+
         // Convert mouse to 3D space to accomodate the camera
         Vector3 cursorPos = Input.mousePosition;
-        cursorPos.z = transform.position.z - Camera.main.transform.position.z;
+        cursorPos.z = objToRotate.position.z - camera.transform.position.z;
 
-        cursorPos = Camera.main.ScreenToWorldPoint(cursorPos);
-        transform.position = Vector3.MoveTowards(transform.position, cursorPos, moveSpeed * Time.deltaTime);
+        cursorPos = camera.ScreenToWorldPoint(cursorPos);
+        objToRotate.position = Vector3.MoveTowards(objToRotate.position, cursorPos, moveSpeed * Time.deltaTime);
     }
 
     void RotateToObj()
     {
-        Vector3 targetDir = target.position - transform.position;
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, rotationSpeed * Time.deltaTime, 0.0f);
-        transform.rotation = Quaternion.LookRotation(newDir);
+        if (!lookAtTarget)
+            return;
+
+        Vector3 targetDir = lookAtTarget.position - objToRotate.position;
+        Vector3 newDir = Vector3.RotateTowards(objToRotate.forward, targetDir, rotationSpeed * Time.deltaTime, 0.0f);
+        Quaternion targetRot = Quaternion.LookRotation(newDir);
+        objToRotate.rotation = new Quaternion(targetRot.x, targetRot.y, targetRot.z, targetRot.w);
     }
 }

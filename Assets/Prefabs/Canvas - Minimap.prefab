@@ -89,6 +89,7 @@ MonoBehaviour:
   minimap: {fileID: 6371829098177510125}
   objectivePrefab: {fileID: 8504977757332649733, guid: c130b9906be581049ba5882a6d91d8c8, type: 3}
   markerPrefab: {fileID: 455719906222885079, guid: d067d15f09ea2c14c85489c78322c60d, type: 3}
+  waypoints: []
   player: {fileID: 4567584769810444259, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
   ActiveInstance: {fileID: 0}
   PathHeightOffset: 1.25
@@ -197,6 +198,7 @@ GameObject:
   - component: {fileID: 6371829099238987055}
   - component: {fileID: 6371829099238987054}
   - component: {fileID: 6371829099238987053}
+  - component: {fileID: 1578297834947638226}
   m_Layer: 5
   m_Name: Canvas - Minimap
   m_TagString: Untagged
@@ -285,3 +287,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1578297834947638226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6371829099238987052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64136eaed7e94d54d8e30f1a28a08214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerIndicatorPrefab: {fileID: 3453944491763529630, guid: b9d31ff0a39418b4db7a35bbc2ac1bbb, type: 3}
+  deliveryWaypoint: {fileID: 6371829098177510126}

@@ -22,6 +22,8 @@ public class CharacterTrigger : MonoBehaviour
     public GameObject defaultDisplayObject;
     public GameObject onKnockOutDisplayObject;
     [Space]
+    public Transform centerPoint;
+    [Space]
     public GameObject[] enableOnMove;
     [Space]
     public bool hideDefaultDisplayOnKO = true;
