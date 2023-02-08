@@ -162,8 +162,6 @@ public class CharacterAnimationController : MonoBehaviour
         moveSpeed = lastSpeed = _speed;
 
         characterAnimator?.SetFloat(animatorLabelMoveSpeed, moveSpeed);
-
-        //print("_speed = " + _speed);
     }
 
     public void SetFloat(string _label, float _value )

@@ -57,7 +57,7 @@ MonoBehaviour:
   m_ParameterInfo:
   - name: SpawnRate
     path: SpawnRate
-    tooltip: 
+    tooltip: Amount of lines
     sheetType: m_Float
     realType: Single
     defaultValue:
@@ -71,7 +71,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: Radius
     path: Radius
-    tooltip: 
+    tooltip: Radius around position
     sheetType: m_Float
     realType: Single
     defaultValue:
@@ -85,7 +85,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: XScaleRange
     path: XScaleRange
-    tooltip: 
+    tooltip: Length of the lines
     sheetType: m_Vector2f
     realType: Vector2
     defaultValue:
@@ -99,7 +99,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: YScaleRange
     path: YScaleRange
-    tooltip: 
+    tooltip: Thickness of the lines
     sheetType: m_Vector2f
     realType: Vector2
     defaultValue:
@@ -113,7 +113,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: VelocityScaleRange
     path: VelocityScaleRange
-    tooltip: 
+    tooltip: Velocity of the lines
     sheetType: m_Vector2f
     realType: Vector2
     defaultValue:
@@ -127,7 +127,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: BaseTexture
     path: BaseTexture
-    tooltip: 
+    tooltip: Texture of the lines
     sheetType: m_NamedObject
     realType: Texture2D
     defaultValue:
@@ -141,7 +141,7 @@ MonoBehaviour:
     descendantCount: 0
   - name: ColorGradient
     path: ColorGradient
-    tooltip: 
+    tooltip: Color gradient of the lines
     sheetType: m_Gradient
     realType: Gradient
     defaultValue:
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_ImportDependencies: []
   m_GraphVersion: 6
   m_ResourceVersion: 1
-  m_saved: 1
+  m_saved: 0
   m_SubgraphDependencies: []
   m_CategoryPath: 
 --- !u!2058629511 &8926484042661614527
@@ -1749,7 +1749,7 @@ MonoBehaviour:
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 0
-  m_Tooltip: 
+  m_Tooltip: Radius around position
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -1829,7 +1829,7 @@ MonoBehaviour:
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 0
-  m_Tooltip: 
+  m_Tooltip: Length of the lines
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 0
-  m_Tooltip: 
+  m_Tooltip: Thickness of the lines
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -2728,7 +2728,7 @@ MonoBehaviour:
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 0
-  m_Tooltip: 
+  m_Tooltip: Texture of the lines
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -3133,7 +3133,7 @@ MonoBehaviour:
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 0
-  m_Tooltip: 
+  m_Tooltip: Velocity of the lines
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -3783,7 +3783,7 @@ MonoBehaviour:
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 0
-  m_Tooltip: 
+  m_Tooltip: Amount of lines
   m_Nodes:
   - m_Id: 0
     linkedSlots:
@@ -3907,7 +3907,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -3927,7 +3927,7 @@ MonoBehaviour:
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 0
-  m_Tooltip: 
+  m_Tooltip: Color gradient of the lines
   m_Nodes:
   - m_Id: 0
     linkedSlots:

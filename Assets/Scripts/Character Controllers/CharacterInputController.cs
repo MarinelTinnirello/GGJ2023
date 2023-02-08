@@ -66,6 +66,9 @@ public class CharacterInputController : CharacterTrigger
         horizontal = inputEnabled && movementAxis != ActiveAxis.Y ? Input.GetAxisRaw("Horizontal") : 0;
         vertical = inputEnabled && movementAxis != ActiveAxis.X ? Input.GetAxisRaw("Vertical") : 0;
 
+        horizontal = Mathf.Clamp(horizontal, -1f, 1);
+        vertical = Mathf.Clamp(vertical, -1f, 1);
+
         direction = new Vector3(horizontal, 0, vertical);//.normalized;
         isMoving = direction.normalized.magnitude >= 0.1f;
 
@@ -133,7 +136,7 @@ public class CharacterInputController : CharacterTrigger
 
     private Vector3 CameraRelativeInput(float inputX, float inputZ)
     {
-        Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
+        Vector3 forward = mainCamera.transform.TransformDirection(Vector3.forward);
         forward.y = 0;
         forward = forward.normalized;
 

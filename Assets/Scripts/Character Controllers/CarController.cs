@@ -18,9 +18,13 @@ public class CarController : CharacterTrigger
     public float gravity = -100f;//-9.81f;
     public bool canJump = true;
     private float dashAmmount = 1f;
+    public bool runIsSticky;
     
     private float horizontal;
     private float vertical;
+
+    private float prevHorizontal;
+    private float prevVertical;
 
     private Vector3 direction;
 
@@ -35,6 +39,8 @@ public class CarController : CharacterTrigger
     private bool isDashing;
 
     private bool inputEnabled = true;
+
+    private bool moveInit;
 
     public override void Start()
     {
@@ -67,6 +73,9 @@ public class CarController : CharacterTrigger
 
         horizontal = inputEnabled && movementAxis != ActiveAxis.Y ? Input.GetAxisRaw("Horizontal") : 0;
         vertical = inputEnabled && movementAxis != ActiveAxis.X ? Input.GetAxisRaw("Vertical") : 0;
+
+        horizontal = horizontal < 0f ? -1f : horizontal > 0f ? 1f : 0f;
+        vertical = vertical < 0f ? -1f : vertical > 0f ? 1f : 0f;
 
         direction = new Vector3(horizontal, 0, vertical);//.normalized;
         isMoving = direction.normalized.magnitude >= 0.1f;
@@ -146,7 +155,7 @@ public class CarController : CharacterTrigger
 
     private Vector3 CameraRelativeInput(float inputX, float inputZ)
     {
-        Vector3 forward = Camera.main.transform.TransformDirection(Vector3.forward);
+        Vector3 forward = mainCamera.transform.TransformDirection(Vector3.forward);
         forward.y = 0;
         forward = forward.normalized;
 
@@ -197,7 +206,7 @@ public class CarController : CharacterTrigger
 
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
         {
-            isRunning = isMoving;
+            isRunning = runIsSticky? true : isMoving;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
@@ -211,6 +220,30 @@ public class CarController : CharacterTrigger
         else if (Input.GetButtonUp("Fire1"))
         {
             GameManager.Instance?.OnPlayerReleaseAttackButton();
+        }
+
+        if (isRunning && !isMoving && !isBlocking)
+        {
+            if (!moveInit) prevVertical = 1f;
+
+            direction = new Vector3(prevHorizontal, 0, prevVertical);
+            isMoving = direction.normalized.magnitude >= 0.1f;
+
+            if (isMoving)
+            {
+                horizontal = prevHorizontal;
+                vertical = prevVertical;
+            } else
+            {
+                direction = Vector3.zero;
+            }
+        }
+        else if(isMoving)
+        {
+            prevHorizontal = horizontal;
+            prevVertical = vertical;
+
+            moveInit = true;
         }
     }
 

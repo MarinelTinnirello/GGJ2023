@@ -8,6 +8,8 @@ public class IndicatorMarker : MonoBehaviour
     #region Variables
     [SerializeField]
     Text distance;
+    public Sprite arrow;
+    public Sprite spot;
     #endregion
 
     public void SetDistanceText(ObjectiveWaypoint sender, GameObject player)

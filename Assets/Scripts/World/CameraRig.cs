@@ -21,6 +21,8 @@ public class CameraRig : MonoBehaviour
         }
     }
 
+    public static CameraRig _instance;
+
     [Header("Camera Target Settings")]
     public List<Transform> targets;
     public Vector3 offset = new Vector3(0,4,-6);
@@ -48,6 +50,9 @@ public class CameraRig : MonoBehaviour
     public Camera mainCamera;
     public Transform shakeContainer;
 
+    [Header("Visual Effects")]
+    public GameObject speedLines;
+
     [Header("Camera Angles")]
     public CameraAngles[] powerCameraAngles;
     private Sequence CameraAngleTweenSequence;
@@ -57,6 +62,23 @@ public class CameraRig : MonoBehaviour
 
     [HideInInspector]
     public bool gameInProgress = true;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            //Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    public static CameraRig Instance
+    {
+        get { return _instance; }
+    }
 
     public virtual void Update()
     {
@@ -154,6 +176,12 @@ public class CameraRig : MonoBehaviour
         {
             return Vector3.zero;
         }
+    }
+
+    public void EnableSpeedLines(bool _state)
+    {
+        if (!speedLines) return;
+        speedLines.SetActive(_state);
     }
 
     private void SetZoomLevel()

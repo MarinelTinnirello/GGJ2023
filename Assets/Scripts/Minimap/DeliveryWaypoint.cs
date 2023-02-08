@@ -8,7 +8,7 @@ public class DeliveryWaypoint : MonoBehaviour
 {
     #region Variables
     [Header("Minimap")]
-    public Camera camera;
+    public Camera m_camera;
     public RectTransform minimap;
 
     [Header("Prefabs")]
@@ -29,6 +29,8 @@ public class DeliveryWaypoint : MonoBehaviour
     float nearestDistance = 10000;
     ObjectiveWaypoint nearestObj;
     bool waypointsReady;
+    [SerializeField]
+    float indicatorBorderSize = 10f;
 
     NavMeshTriangulation Triangulation;
     Coroutine DrawPathCoroutine;
@@ -53,7 +55,7 @@ public class DeliveryWaypoint : MonoBehaviour
 
     public void AssignMinimapCamera(Camera _camera)
     {
-        camera = _camera;
+        m_camera = _camera;
     }
 
     public void StartDrawingPath()
@@ -69,12 +71,12 @@ public class DeliveryWaypoint : MonoBehaviour
 
         ActiveInstance = waypoints[0];
 
-        if (DrawPathCoroutine != null)
-        {
-            StopCoroutine(DrawPathCoroutine);
-        }
+        //if (DrawPathCoroutine != null)
+        //{
+        //    StopCoroutine(DrawPathCoroutine);
+        //}
 
-        DrawPathCoroutine = StartCoroutine(DrawPathToObjective());
+        //DrawPathCoroutine = StartCoroutine(DrawPathToObjective());
 
         waypointsReady = true;
     }
@@ -126,10 +128,10 @@ public class DeliveryWaypoint : MonoBehaviour
 
     public void AddObjectivePoint(ObjectiveWaypoint sender)
     {
-        //RectTransform rect = Instantiate(markerPrefab, minimap).GetComponent<RectTransform>();
-        //sender.rect = rect;
-        LineRenderer path = Instantiate(sender.path, sender.transform).GetComponent<LineRenderer>();
-        sender.path = path;
+        RectTransform rect = Instantiate(markerPrefab, minimap).GetComponent<RectTransform>();
+        sender.rect = rect;
+        //LineRenderer path = Instantiate(sender.path, sender.transform).GetComponent<LineRenderer>();
+        //sender.path = path;
         waypoints.Add(sender);
     }
 
@@ -142,7 +144,7 @@ public class DeliveryWaypoint : MonoBehaviour
         //Destroy(foundObj.rect.gameObject);
         //Destroy(foundObj.path.gameObject);
         //foundObj.rect.gameObject.SetActive(false);
-        foundObj.path.gameObject.SetActive(true);
+        //foundObj.path.gameObject.SetActive(false);
         waypoints.Remove(foundObj);
 
         if (waypoints.Count != 0)
@@ -151,6 +153,9 @@ public class DeliveryWaypoint : MonoBehaviour
 
     void ShowMarkerDistance()
     {
+        if (!waypointsReady)
+            return;
+
         //foreach (ObjectiveWaypoint marker in waypoints)
         //{
         //    Vector3 offset = Vector3.ClampMagnitude(marker.transform.position - player.transform.position, camera.orthographicSize);
@@ -161,45 +166,54 @@ public class DeliveryWaypoint : MonoBehaviour
         //    CheckDistance();
         //}
 
-        if (!waypointsReady)
-            return;
+        // if we want multiple, just do a foreach with the CheckIfOnScreen()
 
-        Vector3 offset = Vector3.ClampMagnitude(ActiveInstance.transform.position - player.transform.position, camera.orthographicSize);
-        offset = offset / camera.orthographicSize * (minimap.rect.width / 2);
-        //ActiveInstance.rect.anchoredPosition = new Vector2(offset.x, offset.z);
-        //ActiveInstance.rect.GetComponent<IndicatorMarker>().SetDistanceText(ActiveInstance, player);
-        //WaypointCamera(ActiveInstance);
-        //ActiveInstance.WaypointCamera(camera);
+        CheckIfOnScreen();
         CheckDistance();
     }
 
-    void WaypointCamera(ObjectiveWaypoint marker)
+    void RotateIndicator()
     {
-        //Image indicator = marker.rect.GetComponent<Image>();
-        //float minX = indicator.GetPixelAdjustedRect().width / 2;
-        //float maxX = minimap.rect.width - minX;
-        //float minY = indicator.GetPixelAdjustedRect().height / 2;
-        //float maxY = minimap.rect.height - minY;
+        Vector3 toPos = ActiveInstance.transform.position;
+        Vector3 fromPos = m_camera.transform.position;
+        fromPos.z = 0f;
+        Vector3 dir = (toPos - fromPos).normalized;
 
-        //Vector2 newPos = camera.ScreenToWorldPoint(marker.transform.position);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360;
+        ActiveInstance.rect.eulerAngles = new Vector3(0, 0, angle);
+    }
 
-        //// check if behind camera
-        //if (Vector3.Dot(marker.transform.position - transform.position, transform.forward) < 0)
-        //{
-        //    // target if behind player
-        //    if (newPos.x < minimap.rect.width / 2)
-        //    {
-        //        newPos.x = maxX;
-        //    }
-        //    else
-        //    {
-        //        newPos.x = minX;
-        //    }
-        //}
+    void CheckIfOnScreen()
+    {
+        Vector3 targetScreenPos = m_camera.WorldToScreenPoint(ActiveInstance.transform.position);
+        bool isOnScreen = targetScreenPos.x <= indicatorBorderSize ||
+            targetScreenPos.x >= Screen.width ||
+            targetScreenPos.y <= indicatorBorderSize ||
+            targetScreenPos.y >= Screen.height;
+        if (isOnScreen)
+        {
+            RotateIndicator();
 
-        //newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
-        //newPos.y = Mathf.Clamp(newPos.y, minY, maxY);
+            ActiveInstance.rect.GetComponent<Image>().sprite = ActiveInstance.rect.GetComponent<IndicatorMarker>().arrow;
 
-        //indicator.transform.position = newPos;
+            Vector3 clampedScreenPos = targetScreenPos;
+            clampedScreenPos.x = Mathf.Clamp(clampedScreenPos.x, indicatorBorderSize, Screen.width - indicatorBorderSize);
+            clampedScreenPos.y = Mathf.Clamp(clampedScreenPos.y, indicatorBorderSize, Screen.height - indicatorBorderSize);
+
+            Vector3 indicatorPos = m_camera.ScreenToWorldPoint(clampedScreenPos);
+            ActiveInstance.rect.position = indicatorPos;
+            ActiveInstance.rect.localPosition = new Vector3(indicatorPos.x, indicatorPos.y, 0f);
+        }
+        else
+        {
+            ActiveInstance.rect.GetComponent<Image>().sprite = ActiveInstance.rect.GetComponent<IndicatorMarker>().spot;
+
+            Vector3 indicatorPos = m_camera.ScreenToWorldPoint(targetScreenPos);
+            ActiveInstance.rect.position = indicatorPos;
+            ActiveInstance.rect.localPosition = new Vector3(indicatorPos.x, indicatorPos.y, 0f);
+
+            ActiveInstance.rect.eulerAngles = Vector3.zero;
+        }
     }
 }

@@ -10,7 +10,7 @@ public class FaceCamera : MonoBehaviour
 
     private void Start()
     {
-        targetObj = Camera.main.gameObject;
+        if(!targetObj) targetObj = Camera.main.gameObject;
     }
 
     private void LateUpdate()
@@ -21,7 +21,7 @@ public class FaceCamera : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime);
         } else
         {
-            transform.LookAt(Camera.main.transform.position);
+            transform.LookAt(targetObj.transform.position);
         }
     }
 }

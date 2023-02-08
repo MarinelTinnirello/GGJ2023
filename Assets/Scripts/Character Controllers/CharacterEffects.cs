@@ -8,6 +8,7 @@ public class CharacterEffects : MonoBehaviour
     [Space, Space]
     public GameObject onHitPrefab;
     public GameObject onLandPrefab;
+    public GameObject onLargeLandPrefab;
     public GameObject transformationEffect;
     public GameObject[] enableOnRun;
     private bool runObjectsOn;
@@ -27,6 +28,9 @@ public class CharacterEffects : MonoBehaviour
 
     [Space]
     public GameObject shadow;
+
+    [Space]
+    public bool shakeCameraOnLand;
 
     //[Space, Tooltip("Trail to enable when character is dashing")]
     //public SpriteTrail.SpriteTrail dashTrail;
@@ -93,6 +97,8 @@ public class CharacterEffects : MonoBehaviour
         {
             enableOnRun[i].SetActive(_state);
         }
+
+        CameraRig.Instance?.EnableSpeedLines(_state);
 
         runObjectsOn = _state;
     }
@@ -166,24 +172,32 @@ public class CharacterEffects : MonoBehaviour
         InstantiateEffectAtCenterPoint(onHitPrefab);
     }
 
-    public void OnGroundStateChange(bool _isGrounded)
+    public void OnGroundStateChange(bool _isGrounded, bool largeLand = false)
     {
         if (shadow)
         {
             shadow.SetActive(_isGrounded);
         }
 
-        if (_isGrounded) OnLand();
+        if (_isGrounded) OnLand(largeLand);
     }
 
-    public void OnLand()
+    public void OnLand(bool largeLand = false)
     {
-        AddEffect(onLandPrefab, false);
+        if (largeLand)
+        {
+            AddEffect(onLargeLandPrefab, false);
+            if (shakeCameraOnLand) CameraRig.Instance?.ShakeCamera(0.9f,0.5f);
+        } else
+        {
+            AddEffect(onLandPrefab, false);
+        }
+        
     }
 
     public void OnFootStep(Vector3 position)
     {
-        InstantiateEffect(FootStepPrefab, position, null);
+        InstantiatePrefab(FootStepPrefab, position, null);
 
         characterSoundEffects?.CallFootStepSoundEffect();
     }
@@ -206,7 +220,7 @@ public class CharacterEffects : MonoBehaviour
             _parent = transform;
         }
 
-        GameObject _obj = InstantiateEffect(_prefab, _pos + _offset, _parent, _destroyTime, _forward);
+        GameObject _obj = InstantiatePrefab(_prefab, _pos + _offset, _parent, _destroyTime, _forward);
 
         return _obj;
     }
@@ -214,14 +228,10 @@ public class CharacterEffects : MonoBehaviour
     public void InstantiateEffectAtCenterPoint(GameObject prefab)
     {
         if (prefab == null) return;
-
-        InstantiateEffect(prefab, centerPoint ? centerPoint.position : Vector3.zero);
+        InstantiatePrefab(prefab, centerPoint ? centerPoint.position : Vector3.zero);
     }
 
-    /// <summary>
-    /// Helper function to instantiate effect prefabs.
-    /// </summary>
-    public GameObject InstantiateEffect(GameObject prefab, Vector3 position = default, Transform parent = null, float destroyTime = 4f, Vector3 _forward = default)
+    public GameObject InstantiatePrefab(GameObject prefab, Vector3 position = default, Transform parent = null, float destroyTime = 4f, Vector3 _forward = default)
     {
         if (prefab == null)
             return null;

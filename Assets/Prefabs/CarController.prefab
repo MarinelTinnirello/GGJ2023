@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6364612228993384673}
   - component: {fileID: 8151010004135358800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 5
   m_SpotAngle: 103.22128
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7076904589990093578}
   - component: {fileID: 2575986561225769365}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 506912866547105588}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4530461350336612770}
   - component: {fileID: 7690771412513256417}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5752699211981461260}
   - component: {fileID: 9095464250714071670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4255893016853302006}
   - component: {fileID: 9590839601061030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +686,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1796925490122595362}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1783646142064654158}
   - component: {fileID: 4222440471152751597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -751,7 +751,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -812,7 +812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3555608467044194129}
   - component: {fileID: 2380129453869073814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -949,7 +949,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6509982797928147879}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5794585795100909307}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,7 +1014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4126724058071803009}
   - component: {fileID: 4919964079093591495}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1046,7 +1046,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -1107,7 +1107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4055759855995341872}
   - component: {fileID: 6250904463217174377}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1245,7 +1245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1989580043316033337}
   - component: {fileID: 7931629255777043519}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,7 +1277,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -1337,7 +1337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 106521002560912892}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1370,7 +1370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3397600715296921568}
   - component: {fileID: 3397600715296921571}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1508,7 +1508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3397600715607240510}
   - component: {fileID: 3397600715607240505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1728,7 +1728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7649861598928873041}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1761,7 +1761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7865661670604906150}
   - component: {fileID: 8989054222559938722}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1898,7 +1898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6388495809579207900}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1930,7 +1930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3715225045554188278}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1963,7 +1963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5812443514467938171}
   - component: {fileID: 2356509930641260607}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1995,7 +1995,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -2056,7 +2056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3155442984297141294}
   - component: {fileID: 320936253750532668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2088,7 +2088,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -2149,7 +2149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584768107980017}
   - component: {fileID: 4567584768107980016}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRearRightRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2326,7 +2326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584768163796173}
   - component: {fileID: 4567584768163796172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFrontRightRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2408,7 +2408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584768279014667}
   - component: {fileID: 4567584768279014666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2587,7 +2587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584768398851072}
   - component: {fileID: 4567584768398851075}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRearRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2669,7 +2669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584768454670277}
   - component: {fileID: 4567584768454670276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRightRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2750,7 +2750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4567584768588503904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DustTrails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2916,7 +2916,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584768663023984}
   - component: {fileID: 4567584768663023987}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2999,7 +2999,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584768669628629}
   - component: {fileID: 4567584768669628628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3272,7 +3272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584768734601939}
   - component: {fileID: 4567584768734601938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3354,7 +3354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4567584768803235038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarWheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3488,7 +3488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769118256819}
   - component: {fileID: 4567584769118256818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3571,7 +3571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769191452714}
   - component: {fileID: 4567584769191452717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3750,7 +3750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769241345892}
   - component: {fileID: 4567584769241345895}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRearLeftRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3832,7 +3832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769291982456}
   - component: {fileID: 4567584769291982459}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRearLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3914,7 +3914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4567584769356760938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4065,7 +4065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769363278528}
   - component: {fileID: 4567584769363278531}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarLeftRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4147,7 +4147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769455821332}
   - component: {fileID: 4567584769455821335}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4230,7 +4230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769528467369}
   - component: {fileID: 4567584769528467368}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4314,7 +4314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769675132483}
   - component: {fileID: 4567584769675132482}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRearLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4398,7 +4398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769698986974}
   - component: {fileID: 4567584769698986017}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4482,7 +4482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769701738077}
   - component: {fileID: 4567584769701738076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4775,6 +4775,7 @@ MonoBehaviour:
   centerPoint: {fileID: 0}
   onHitPrefab: {fileID: 0}
   onLandPrefab: {fileID: 1734828335700164, guid: 30908b443a5254d4c8be63b23963b04c, type: 3}
+  onLargeLandPrefab: {fileID: 1734828335700164, guid: 30908b443a5254d4c8be63b23963b04c, type: 3}
   transformationEffect: {fileID: 0}
   enableOnRun:
   - {fileID: 4067661751944591927}
@@ -4792,6 +4793,7 @@ MonoBehaviour:
   - {fileID: 4457680680006566356}
   - {fileID: 4457680678477369456}
   shadow: {fileID: 0}
+  shakeCameraOnLand: 1
   characterSoundEffects: {fileID: 0}
   characterAnimationController: {fileID: 0}
   isDashing: 0
@@ -4817,6 +4819,7 @@ MonoBehaviour:
   combo: {fileID: 0}
   jump: {fileID: 8300000, guid: 39cf98ad008bb534f966d79b2b9a6057, type: 3}
   land: {fileID: 0}
+  heavyLand: {fileID: 8300000, guid: c8e62f22721ddc14ca2707becfe671ed, type: 3}
   knockOut: []
   transformedVO: []
   knockOutVO: {fileID: 0}
@@ -4843,6 +4846,8 @@ MonoBehaviour:
   characterIsSetup: 0
   wasGrounded: 0
   wasNearGround: 0
+  wasAirborne: 0
+  isAirborne: 0
   characterSetupController: {fileID: 0}
   characterRenderType: 1
   characterAnimationController: {fileID: 0}
@@ -4852,6 +4857,7 @@ MonoBehaviour:
   enableOnMove:
   - {fileID: 6248394640034176359}
   hideDefaultDisplayOnKO: 1
+  mainCamera: {fileID: 0}
   healthBar: {fileID: 0}
   maxHealth: 150
   characterEffects: {fileID: 4567584769810444261}
@@ -4902,6 +4908,7 @@ MonoBehaviour:
   jumpHeight: 4.5
   gravity: -100
   canJump: 1
+  runIsSticky: 1
   currentPowerType: 0
   enableRotationTimer: 0
 --- !u!1 &4567584769811874542
@@ -5009,7 +5016,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769836811273}
   - component: {fileID: 4567584769836811272}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFrontLeftRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5091,7 +5098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769839777577}
   - component: {fileID: 4567584769839777576}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRearRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5269,7 +5276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584769935554630}
   - component: {fileID: 4567584769935554633}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5352,7 +5359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584770013043264}
   - component: {fileID: 4567584770013043267}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5436,7 +5443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584770041479626}
   - component: {fileID: 4567584770041479629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarFrontRear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5518,7 +5525,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584770157717240}
   - component: {fileID: 4567584770157717243}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarRearRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5602,7 +5609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567584770184124759}
   - component: {fileID: 4567584770184124758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5649,7 +5656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3162448888565116263}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5681,7 +5688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5603257984235953099}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5713,7 +5720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 664032196426175466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5746,7 +5753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5848559608618165283}
   - component: {fileID: 6996413919866407717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5884,7 +5891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7303210528519948638}
   - component: {fileID: 2355639730358238014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6021,7 +6028,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4937028287109390410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6053,7 +6060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318877316925720491}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6086,7 +6093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7406680305571057368}
   - component: {fileID: 7027610878328329668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6447,7 +6454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7895665178862896322}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6480,7 +6487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6872389702260542951}
   - component: {fileID: 6515588098474083130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6512,7 +6519,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 5
   m_SpotAngle: 103.22128
@@ -6573,7 +6580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3087504173836778143}
   - component: {fileID: 7680520735092533105}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6711,7 +6718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 846818972753972013}
   - component: {fileID: 7486847062330177078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6743,7 +6750,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 5
   m_SpotAngle: 103.22128
@@ -6804,7 +6811,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3977122763764180294}
   - component: {fileID: 1745103353781454285}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6942,7 +6949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6448343131653981878}
   - component: {fileID: 8770269067750998499}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6974,7 +6981,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -7035,7 +7042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6913025792601099971}
   - component: {fileID: 1386540935429205101}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7067,7 +7074,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 5
   m_SpotAngle: 103.22128
@@ -7128,7 +7135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4202471194737574186}
   - component: {fileID: 8877906718870580001}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7266,7 +7273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8770248986183451088}
   - component: {fileID: 5507888085176014341}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearTrailR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7404,7 +7411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5599993531083702659}
   - component: {fileID: 4686778190504823508}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7436,7 +7443,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -7497,7 +7504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4418305325300594762}
   - component: {fileID: 8398239420918388441}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7529,7 +7536,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -7672,7 +7679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 436888379358624777}
   - component: {fileID: 3718159088799881046}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7704,7 +7711,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 5
   m_SpotAngle: 103.22128
@@ -7764,7 +7771,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5224944123393815544}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7797,7 +7804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3099834052634672565}
   - component: {fileID: 670963201534720765}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7829,7 +7836,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 5
   m_SpotAngle: 103.22128
@@ -7889,7 +7896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8419162882081531673}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7922,7 +7929,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1391410289149357326}
   - component: {fileID: 6730287229440304766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7954,7 +7961,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -8015,7 +8022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3344415578253717017}
   - component: {fileID: 3618687341701668873}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpotLightA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8047,7 +8054,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.96711314, b: 0.7028302, a: 1}
   m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 103.22128
@@ -8108,6 +8115,10 @@ PrefabInstance:
     - target: {fileID: 1734828335700164, guid: 5f230cafe4c5973458c36e3581bfe3d0, type: 3}
       propertyPath: m_Name
       value: footstepLoopA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734828335700164, guid: 5f230cafe4c5973458c36e3581bfe3d0, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1734828335700164, guid: 5f230cafe4c5973458c36e3581bfe3d0, type: 3}
       propertyPath: m_IsActive
@@ -8188,6 +8199,10 @@ PrefabInstance:
     - target: {fileID: 1734828335700164, guid: 5f230cafe4c5973458c36e3581bfe3d0, type: 3}
       propertyPath: m_Name
       value: footstepLoopB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734828335700164, guid: 5f230cafe4c5973458c36e3581bfe3d0, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1734828335700164, guid: 5f230cafe4c5973458c36e3581bfe3d0, type: 3}
       propertyPath: m_IsActive

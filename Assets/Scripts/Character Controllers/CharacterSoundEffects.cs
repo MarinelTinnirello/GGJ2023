@@ -17,6 +17,7 @@ public class CharacterSoundEffects : MonoBehaviour
     public AudioClip combo;
     public AudioClip jump;
     public AudioClip land;
+    public AudioClip heavyLand;
     public AudioClip[] knockOut;
 
     [Header("Voice Over Audio Clips"), Tooltip("Character specific voice overs.")]

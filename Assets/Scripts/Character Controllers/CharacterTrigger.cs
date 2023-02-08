@@ -10,7 +10,7 @@ public class CharacterTrigger : MonoBehaviour
     public CharacterVariantController characterVariantController;
     public LayerMask groundCheckLayers;
     [HideInInspector]
-    public bool isGrounded, isNearGround, isHumanoid, characterIsSetup, wasGrounded, wasNearGround;
+    public bool isGrounded, isNearGround, isHumanoid, characterIsSetup, wasGrounded, wasNearGround, wasAirborne, isAirborne;
     [HideInInspector]
     public CharacterSetup characterSetupController;
 
@@ -27,6 +27,8 @@ public class CharacterTrigger : MonoBehaviour
     public GameObject[] enableOnMove;
     [Space]
     public bool hideDefaultDisplayOnKO = true;
+    [HideInInspector]
+    public Camera mainCamera;
 
     [Header("Character Health")]
     public CharacterHealth healthBar;
@@ -100,6 +102,8 @@ public class CharacterTrigger : MonoBehaviour
 
         characterSetupController = GetComponent<CharacterSetup>();
         characterCollider = GetComponent<Collider>();
+
+        mainCamera = Camera.main;
     }
 
     public virtual void OnControllerColliderHit(ControllerColliderHit hit)
@@ -203,24 +207,35 @@ public class CharacterTrigger : MonoBehaviour
     public virtual void CheckGroundState()
     {
         isGrounded = characterController ? characterController.isGrounded : isGrounded;
-
+        
         if (wasNearGround != isNearGround)
         {
             characterAnimationController?.SetNearGroundState(isNearGround);
             wasNearGround = isNearGround;
+
+            if (!isGrounded && !isNearGround) wasAirborne = true;
         }
 
         characterAnimationController?.SetAnimationType(isGrounded ? isMoving ? CharacterAnimationStates.isWalking : CharacterAnimationStates.isIdle : CharacterAnimationStates.isJumping);
         
         if (wasGrounded == isGrounded) return;
 
-        characterEffects?.OnGroundStateChange(isGrounded);
+        characterEffects?.OnGroundStateChange(isGrounded, wasAirborne);
         characterAnimationController?.SetGroundState(isGrounded);
 
         if (isGrounded)
         {
-            //land
             //if (umbrellaIsOpen) playerCharacterController?.characterAudioController?.PlaySoundEffect("FootStepLand");
+
+            if (wasAirborne)
+            {
+                characterSoundEffects?.PlaySoundEffect(characterSoundEffects.heavyLand);
+            } else
+            {
+                characterSoundEffects?.PlaySoundEffect(characterSoundEffects.land);
+            }
+
+            wasAirborne = false;
         }
 
         wasGrounded = isGrounded;

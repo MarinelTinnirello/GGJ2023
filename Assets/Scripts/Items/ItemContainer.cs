@@ -89,7 +89,7 @@ public class ItemContainer : MonoBehaviour
             _parent = transform;
         }
 
-        GameObject _obj = InstantiateEffect(_prefab, _pos + _offset, _parent, _destroyTime, _forward);
+        GameObject _obj = InstantiatePrefab(_prefab, _pos + _offset, _parent, _destroyTime, _forward);
 
         return _obj;
     }
@@ -114,7 +114,7 @@ public class ItemContainer : MonoBehaviour
             _parent = transform;
         }
 
-        GameObject _obj = InstantiateEffect(_prefab, _pos + _offset, _parent, _destroyTime, _forward);
+        GameObject _obj = InstantiatePrefab(_prefab, _pos + _offset, _parent, _destroyTime, _forward);
 
         return _obj;
     }
@@ -123,9 +123,9 @@ public class ItemContainer : MonoBehaviour
     {
         if (prefab == null) return;
 
-        InstantiateEffect(prefab, centerPoint ? centerPoint.position : Vector3.zero);
+        InstantiatePrefab(prefab, centerPoint ? centerPoint.position : Vector3.zero);
     }
-    public GameObject InstantiateEffect(GameObject prefab, Vector3 position = default, Transform parent = null, float destroyTime = 4f, Vector3 _forward = default)
+    public GameObject InstantiatePrefab(GameObject prefab, Vector3 position = default, Transform parent = null, float destroyTime = 4f, Vector3 _forward = default)
     {
         if (prefab == null)
             return null;
