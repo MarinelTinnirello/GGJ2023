@@ -31,6 +31,8 @@ public class DeliveryWaypoint : MonoBehaviour
     bool waypointsReady;
     [SerializeField]
     float indicatorBorderSize = 10f;
+    [SerializeField]
+    float metersAway = 15f;
 
     NavMeshTriangulation Triangulation;
     Coroutine DrawPathCoroutine;
@@ -106,6 +108,32 @@ public class DeliveryWaypoint : MonoBehaviour
         }
     }
 
+    public void AddObjectivePoint(ObjectiveWaypoint sender)
+    {
+        RectTransform rect = Instantiate(markerPrefab, minimap).GetComponent<RectTransform>();
+        sender.rect = rect;
+        //LineRenderer path = Instantiate(sender.path, sender.transform).GetComponent<LineRenderer>();
+        //sender.path = path;
+        waypoints.Add(sender);
+        sender.rect.gameObject.SetActive(false);
+    }
+
+    public void RemoveObjectivePoint(ObjectiveWaypoint sender)
+    {
+        if (!waypoints.Exists(objective => objective == sender))
+            return;
+
+        ObjectiveWaypoint foundObj = waypoints.Find(objective => sender);
+        //Destroy(foundObj.rect.gameObject);
+        //Destroy(foundObj.path.gameObject);
+        foundObj.rect.gameObject.SetActive(false);
+        //foundObj.path.gameObject.SetActive(false);
+        waypoints.Remove(foundObj);
+
+        if (waypoints.Count != 0)
+            ActiveInstance = waypoints[0];
+    }
+
     void CheckDistance()
     {
         for (int i = 0; i < waypoints.Count; i++)
@@ -119,41 +147,18 @@ public class DeliveryWaypoint : MonoBehaviour
         }
 
         ActiveInstance = nearestObj;
+        if (ActiveInstance.rect)
+            ActiveInstance.rect.gameObject.SetActive(true);
 
-        if (Vector3.Distance(ActiveInstance.transform.position, player.transform.position) < ActiveInstance.metersAway)
+        if (Vector3.Distance(ActiveInstance.transform.position, player.transform.position) < metersAway)
         {
             RemoveObjectivePoint(ActiveInstance);
         }
     }
 
-    public void AddObjectivePoint(ObjectiveWaypoint sender)
-    {
-        RectTransform rect = Instantiate(markerPrefab, minimap).GetComponent<RectTransform>();
-        sender.rect = rect;
-        //LineRenderer path = Instantiate(sender.path, sender.transform).GetComponent<LineRenderer>();
-        //sender.path = path;
-        waypoints.Add(sender);
-    }
-
-    public void RemoveObjectivePoint(ObjectiveWaypoint sender)
-    {
-        if (!waypoints.Exists(objective => objective == sender))
-            return;
-
-        ObjectiveWaypoint foundObj = waypoints.Find(objective => sender);
-        //Destroy(foundObj.rect.gameObject);
-        //Destroy(foundObj.path.gameObject);
-        //foundObj.rect.gameObject.SetActive(false);
-        //foundObj.path.gameObject.SetActive(false);
-        waypoints.Remove(foundObj);
-
-        if (waypoints.Count != 0)
-            ActiveInstance = waypoints[0];
-    }
-
     void ShowMarkerDistance()
     {
-        if (!waypointsReady)
+        if (!waypointsReady || !ActiveInstance.rect)
             return;
 
         //foreach (ObjectiveWaypoint marker in waypoints)

@@ -85,17 +85,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37d298e9041cf846875363a6d76a41e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
+  m_camera: {fileID: 0}
   minimap: {fileID: 6371829098177510125}
   objectivePrefab: {fileID: 8504977757332649733, guid: c130b9906be581049ba5882a6d91d8c8, type: 3}
   markerPrefab: {fileID: 455719906222885079, guid: d067d15f09ea2c14c85489c78322c60d, type: 3}
   waypoints: []
-  player: {fileID: 4567584769810444259, guid: c1ff38fdc656c1f41aa1d0ed7dce258a, type: 3}
+  player: {fileID: 0}
   ActiveInstance: {fileID: 0}
   PathHeightOffset: 1.25
   PathUpdateSpeed: 0.25
   SpawnHeightOffset: 1.5
   nearestDistance: 10000
+  waypointsReady: 0
+  indicatorBorderSize: 10
 --- !u!1 &6371829098397499625
 GameObject:
   m_ObjectHideFlags: 0
