@@ -38,7 +38,13 @@ public class GameManager : MonoBehaviour
     public Transform SortIndexStartPoint;
 
     [Space]
-    public int mainCharacterID = 0; 
+    public int mainCharacterID = 0;
+
+    [Header("Player Status")]
+    public CarStates currentCarState = CarStates.Idle;
+    public CarGasTankStates gasTank = CarGasTankStates.HasFuel;
+    [Space]
+    public string playerEarnings = "$0.00";
 
     [Header("Items Prefabs")]
     public MoveableItemContainer[] moveableItems;
@@ -112,8 +118,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool resetSceneWasCalled;
     
-    [HideInInspector]
-    public CharacterInputController mainCharacterController;
+    //[HideInInspector]
+    public CarController mainCharacterController;
     
     private bool playerInitCalled;
     private bool sceneLoading;
@@ -350,26 +356,29 @@ public class GameManager : MonoBehaviour
         {
             _mainCharacter = Instantiate(mainCharacterPrefab, new Vector3(-1.471f, 0.0f, -4.39f), Quaternion.identity);
             _mainCharacter.name = "MainCharacterObj";
-
             
-        } else if (mainCharacter)
+        } else if (mainCharacterController)
         {
-            _mainCharacter = mainCharacter.GetComponent<CharacterTrigger>();
+            _mainCharacter = mainCharacterController;
         }
 
         if (_mainCharacter != null)
         {
             _characterSetup = _mainCharacter.GetComponent<CharacterSetup>();
-            _characterSetup.AddCharacterModelByID(mainCharacterID, CharacterType.MainPlayer);
+            _characterSetup?.AddCharacterModelByID(mainCharacterID, CharacterType.MainPlayer);
 
-            SetMainCharacter(_mainCharacter);// mainCharacterController = mainCharacter.GetComponent<CharacterInputController>();
+            SetMainCharacter(_mainCharacter, true);// mainCharacterController = mainCharacter.GetComponent<CharacterInputController>();
         }
     }
 
-    public void SetMainCharacter(CharacterTrigger characterTrigger)
+    public void SetMainCharacter(CharacterTrigger characterTrigger, bool _override = false)
     {
-        mainCharacterController = (CharacterInputController)characterTrigger;
+        if (mainCharacter && !_override) return;
+
+        mainCharacterController = (CarController)characterTrigger;
         mainCharacter = mainCharacterController.gameObject;
+
+        UIManager?.AssignMainPlayer(mainCharacterController);
 
         AddTargetToCameraRig(mainCharacter.transform);
     }
@@ -438,7 +447,7 @@ public class GameManager : MonoBehaviour
         
         if (timerDisplay && timeRemaining > 0 && timerActive)
         {
-            timerDisplay.text = "▶ " + minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + mseconds.ToString("00");
+            timerDisplay.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + mseconds.ToString("00");//"▶ " + 
         } else
         {
             return;
@@ -466,7 +475,7 @@ public class GameManager : MonoBehaviour
     {
         if (inBossFight && !bossDefeated) return;
 
-        if(timeRemaining <= switchToBossTime && !bossDefeated)
+        if(timeRemaining <= switchToBossTime && !bossDefeated && bossPrefab)
         {
             BossController newBoss = Instantiate(bossPrefab, GetEnemySpawnPosition(), Quaternion.identity);
             newBoss.SetCharacterVariantByID(currentEnemyID);
@@ -558,6 +567,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UpdateCarState(CarStates _state)
+    {
+        UIManager?.UpdateCarState(_state);
+        currentCarState = _state;
+    }
+
+    public void UpdateGasTank(CarGasTankStates _state)
+    {
+        UIManager?.UpdateGasTank(_state);
+        mainCharacterController?.UpdateGasTank(_state);
+        gasTank = _state;
+
+        if(gasTank == CarGasTankStates.EmptyTank) OnCallGameOver(GameOverState.EmptyTank);
+    }
+
+    public void SetEarningsTotal(string _total)
+    {
+        playerEarnings = _total;
+    }
+
     public float GetJumpPoint()
     {
         if (jumpLine)
@@ -595,64 +624,6 @@ public class GameManager : MonoBehaviour
     public void OnPlayerReleaseAttackButton()
     {
         UIManager?.UserAttackInput(false);
-    }
-
-    public void PlayRandomSoundClip(AudioClip[] clips)
-    {
-        if (clips.Length <= 0) return;
-        PlaySoundEffect(clips[UnityEngine.Random.Range(0, clips.Length)]);
-    }
-
-    public void PlaySoundEffectByName(string _name, float _delay = 0f)
-    {
-        StartCoroutine(OnDelayedPlaySoundEffect(_name, null, _delay, false, true));
-    }
-
-    public void PlayVoiceOverClipByName(string _name, float _delay = 0f)
-    {
-        StartCoroutine(OnDelayedPlaySoundEffect(_name, null, _delay, true, true));
-    }
-    private IEnumerator OnDelayedPlaySoundEffect(string _name, AudioClip _audioClip, float _delay, bool _isVoiceOver, bool _useDictionary)
-    {
-        yield return new WaitForSeconds(_delay);
-
-        if (_useDictionary)
-        {
-            PlaySoundClipFromDic(_name, _isVoiceOver);
-        }
-        else
-        {
-            PlaySoundEffect(_audioClip);
-        }
-    }
-
-    public void PlaySoundEffect(AudioClip clip)
-    {
-        if (!clip || !audioSourceSoundEffects) return;
-
-        audioSourceSoundEffects.PlayOneShot(clip);
-    }
-
-    public void PlaySoundClipFromDic(string audioName, bool announcer = false)
-    {
-        if (soundEffectsDictionary.ContainsKey(audioName))
-        {
-            if (announcer == true && audioSourceVoiceOvers)
-            {
-                audioSourceVoiceOvers.Stop();
-                audioSourceVoiceOvers.clip = soundEffectsDictionary[audioName];
-                audioSourceVoiceOvers.Play();
-            }
-            else
-            {
-                audioSourceSoundEffects.PlayOneShot(soundEffectsDictionary[audioName]);
-            }
-
-        }
-        else
-        {
-            Debug.LogWarning("Could not find AudioClip in dictionary [ " + audioName + " ] ");
-        }
     }
 
     public void OnPlayerFail()
@@ -743,6 +714,21 @@ public class GameManager : MonoBehaviour
                 playerLost = true;
 
                 break;
+            case GameOverState.CarDamaged:
+                print("Car Immobile | Car Damaged");
+                playerLost = true;
+
+                break;
+            case GameOverState.OutOfBounds:
+                print("Car Immobile | Out Of Bounds");
+                playerLost = true;
+
+                break;
+            case GameOverState.EmptyTank:
+                print("Car Immobile | Out Of Gas");
+                playerLost = true;
+
+                break;
         }
 
         if (playerWon)
@@ -790,5 +776,63 @@ public class GameManager : MonoBehaviour
     private FinalScoreState EvaluateWinState(float finalScorePercentage)
     {
         return (finalScorePercentage < 0.7f) ? FinalScoreState.OneStar : (finalScorePercentage < 0.9f) ? FinalScoreState.TwoStars : FinalScoreState.ThreeStars;
+    }
+
+    public void PlayRandomSoundClip(AudioClip[] clips)
+    {
+        if (clips.Length <= 0) return;
+        PlaySoundEffect(clips[UnityEngine.Random.Range(0, clips.Length)]);
+    }
+
+    public void PlaySoundEffectByName(string _name, float _delay = 0f)
+    {
+        StartCoroutine(OnDelayedPlaySoundEffect(_name, null, _delay, false, true));
+    }
+
+    public void PlayVoiceOverClipByName(string _name, float _delay = 0f)
+    {
+        StartCoroutine(OnDelayedPlaySoundEffect(_name, null, _delay, true, true));
+    }
+    private IEnumerator OnDelayedPlaySoundEffect(string _name, AudioClip _audioClip, float _delay, bool _isVoiceOver, bool _useDictionary)
+    {
+        yield return new WaitForSeconds(_delay);
+
+        if (_useDictionary)
+        {
+            PlaySoundClipFromDic(_name, _isVoiceOver);
+        }
+        else
+        {
+            PlaySoundEffect(_audioClip);
+        }
+    }
+
+    public void PlaySoundEffect(AudioClip clip)
+    {
+        if (!clip || !audioSourceSoundEffects) return;
+
+        audioSourceSoundEffects.PlayOneShot(clip);
+    }
+
+    public void PlaySoundClipFromDic(string audioName, bool announcer = false)
+    {
+        if (soundEffectsDictionary.ContainsKey(audioName))
+        {
+            if (announcer == true && audioSourceVoiceOvers)
+            {
+                audioSourceVoiceOvers.Stop();
+                audioSourceVoiceOvers.clip = soundEffectsDictionary[audioName];
+                audioSourceVoiceOvers.Play();
+            }
+            else
+            {
+                audioSourceSoundEffects.PlayOneShot(soundEffectsDictionary[audioName]);
+            }
+
+        }
+        else
+        {
+            Debug.LogWarning("Could not find AudioClip in dictionary [ " + audioName + " ] ");
+        }
     }
 }

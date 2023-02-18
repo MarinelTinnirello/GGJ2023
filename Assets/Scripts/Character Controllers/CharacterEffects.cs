@@ -11,7 +11,7 @@ public class CharacterEffects : MonoBehaviour
     public GameObject onLargeLandPrefab;
     public GameObject transformationEffect;
     public GameObject[] enableOnRun;
-    private bool runObjectsOn;
+    private bool runObjectsOn, wasRunning;
 
     [Tooltip("Effect prefab to instantiate on character step.")]
     public GameObject FootStepPrefab;
@@ -34,6 +34,9 @@ public class CharacterEffects : MonoBehaviour
 
     //[Space, Tooltip("Trail to enable when character is dashing")]
     //public SpriteTrail.SpriteTrail dashTrail;
+
+    [HideInInspector]
+    public CharacterTrigger characterController;
 
     [HideInInspector]
     public CharacterSoundEffects characterSoundEffects;
@@ -68,9 +71,22 @@ public class CharacterEffects : MonoBehaviour
         CheckIfRunning();
     }
 
+    public void AssignCharacterController(CharacterTrigger _character)
+    {
+        characterController = _character;
+    }
+
     private void CheckIfRunning()
     {
-        if (!characterAnimationController) return;
+        if (characterController.waitingForEventEnd)
+        {
+            EnableObjectsOnRun(false);
+            return;
+        }
+
+        if (!characterAnimationController || characterAnimationController.isRunning == wasRunning) return;
+
+        wasRunning = characterAnimationController.isRunning;
 
         if (characterAnimationController.isGrounded && characterAnimationController.isRunning)
         {
@@ -87,6 +103,8 @@ public class CharacterEffects : MonoBehaviour
         }
 
         EnableObjectsOnRun(characterAnimationController.isRunning);
+
+        CameraRig.Instance?.DoEventZoom(characterAnimationController.isRunning ? -4f : 0f);//-5
     }
 
     public void EnableObjectsOnRun(bool _state, bool forceUpdate = false)
@@ -255,5 +273,30 @@ public class CharacterEffects : MonoBehaviour
         }
 
         return obj;
+    }
+
+    public void OnCallGameOver(GameOverState state, bool playerWon = false)
+    {
+        switch (state)
+        {
+            case GameOverState.Win:
+                //
+                break;
+            case GameOverState.EmptyTank:
+                characterSoundEffects?.PlaySoundEffect(characterSoundEffects.emptyTank);
+                break;
+            case GameOverState.OutOfBounds:
+                //
+                break;
+            case GameOverState.CarDamaged:
+                //
+                break;
+            default:
+                //
+                break;
+        }
+
+        EnableObjectsOnRun(false, true);
+        characterAnimationController?.OnCallGameOver(state, playerWon);
     }
 }

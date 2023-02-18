@@ -147,7 +147,7 @@ public class CharacterVariantController : MonoBehaviour
             { RightFoot, CharacterBodyParts.RightFoot }
         };
 
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
 
         shirtSpriteRenderers = new List<SpriteRenderer>();
         

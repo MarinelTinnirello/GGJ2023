@@ -20,6 +20,12 @@ public class CharacterSoundEffects : MonoBehaviour
     public AudioClip heavyLand;
     public AudioClip[] knockOut;
 
+    [Header("Car Sound Effects"), Tooltip("Car specific sound effects.")]
+
+    public AudioSource lowFuel;
+    public AudioClip fillGas;
+    public AudioClip emptyTank;
+
     [Header("Voice Over Audio Clips"), Tooltip("Character specific voice overs.")]
     public AudioClip[] transformedVO;
     public AudioClip knockOutVO;
@@ -47,6 +53,21 @@ public class CharacterSoundEffects : MonoBehaviour
     public void CallTransformSounds(int tranformID = 0)
     {
         PlayRandomSoundClip(onTransform);
+    }
+
+    public void EnableLowFuelSound(bool _state)
+    {
+        if (!lowFuel) return;
+
+        lowFuel.loop = _state;
+
+        if (_state)
+        {
+            lowFuel.Play();
+        } else
+        {
+            lowFuel.Stop();
+        }
     }
 
     public void CallHitSoundEffect(AttackType attackDamage)

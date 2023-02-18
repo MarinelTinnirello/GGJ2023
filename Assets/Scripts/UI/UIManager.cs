@@ -22,7 +22,12 @@ public class UIManager : MonoBehaviour
     public AudioSource backgroundMusicAudioSource;
     public AudioSource soundEffectsAudioSource;
     public AudioSource pauseMusicAudioSource;
-    
+
+    [Header("Character Status")]
+    public MinimapController minimap;
+    public GasMeter gasMeter;
+    public CharacterFundManager funds;
+
     [Header("BeatTracker Settings")]
     public RectTransform beatTrackerBar;
     private Vector2 beatTrackerPos;
@@ -84,6 +89,11 @@ public class UIManager : MonoBehaviour
         BeatTrackShown(false, 0f);
 
         isReady = true;
+    }
+
+    public void AssignMainPlayer(CharacterTrigger _player)
+    {
+        minimap?.AssignMainPlayer(_player);
     }
 
     public void OnGameStarted()
@@ -158,6 +168,16 @@ public class UIManager : MonoBehaviour
         if (animator) animator.SetBool("GamePaused", state);
 
         CursorActive(state, CursorLockMode.None);
+    }
+
+    public void UpdateCarState(CarStates _state)
+    {
+        gasMeter?.UpdateCarStatus(_state);
+    }
+
+    public void UpdateGasTank(CarGasTankStates _state)
+    {
+        //gasTank = _state;
     }
 
     private void BeatTrackShown(bool state, float animationTime = 1f, float delayTime = 0f)

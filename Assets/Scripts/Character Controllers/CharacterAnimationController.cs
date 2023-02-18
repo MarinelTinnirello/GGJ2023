@@ -41,6 +41,7 @@ public class CharacterAnimationController : MonoBehaviour
     private readonly string animatorLabelIsGrounded = "IsGrounded";
     private readonly string animatorLabelIsNearGround = "IsNearGround";
     private readonly string animatorLabelIsRunning = "IsRunning";
+    private readonly string animatorLabelIsRefueling = "IsRefueling";
     private readonly string animatorLabelIsBlocking = "Blocking";
 
     private float lastSpeed = -1.0f;
@@ -68,6 +69,8 @@ public class CharacterAnimationController : MonoBehaviour
     private Quaternion originalRotation;
     private Vector3 originalEulerAngles;
 
+    private bool gameOverCalled;
+
     private void Start()
     {
         if (!characterAnimator) characterAnimator = GetComponent<Animator>();
@@ -81,7 +84,7 @@ public class CharacterAnimationController : MonoBehaviour
 
     private void Update()
     {
-        bool hasMovement = Mathf.Abs(horizontal) + Mathf.Abs(vertical) != 0f;
+        bool hasMovement = gameOverCalled? false : Mathf.Abs(horizontal) + Mathf.Abs(vertical) != 0f;
 
         if (currentAnimationState != prevAnimationState) SetAnimationType(currentAnimationState);
         if (currentFacingDirection != prevFacingDirection) UpdateCharacterFacingDireciton(currentFacingDirection);
@@ -215,6 +218,11 @@ public class CharacterAnimationController : MonoBehaviour
         characterAnimator?.SetInteger(animatorLabelPowerTypeID, powerTypeID);
     }
 
+    public void IsRefueling(bool _state)
+    {
+        SetBool(animatorLabelIsRefueling, _state);
+    }
+
     public void SetAnimationType(CharacterAnimationStates _state, bool _isActive = true)
     {
         bool _updateAnimationTypeID = true;
@@ -265,5 +273,20 @@ public class CharacterAnimationController : MonoBehaviour
             spriteRenderer.sortingLayerName = targetLayer;
 
         characterHealth?.SetSortingLayer(targetLayer);
+    }
+
+    public void OnCallGameOver(GameOverState state, bool playerWon = false)
+    {
+        switch (state)
+        {
+            case GameOverState.Win:
+                //
+                break;
+            default:
+                //
+                break;
+        }
+        
+        gameOverCalled = true;
     }
 }

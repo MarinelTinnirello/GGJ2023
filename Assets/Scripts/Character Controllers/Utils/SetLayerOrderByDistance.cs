@@ -16,7 +16,7 @@ public class SetLayerOrderByDistance : MonoBehaviour
             if (!sortingIndexStartPoint) sortingIndexStartPoint = GameManager.Instance.SortIndexStartPoint;
         }
 
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>(true);
         sortingLayerOrder = new Dictionary<SpriteRenderer, int>();
 
         foreach (SpriteRenderer spriteRenderer in spriteRenderers)

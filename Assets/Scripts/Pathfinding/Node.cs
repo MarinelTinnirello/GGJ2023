@@ -50,8 +50,21 @@ public class Node : MonoBehaviour
 	{
 		FindObjectOfType<Graph>().AddNodeToList(this);
 
+		AddConnections();
+	}
+
+    void Start()
+    {
+        //
+    }
+
+    public void AddConnections()
+    {
 		origin = transform.position;
 		direction = transform.forward;
+		// lazy fix for the scale up of the models we do
+		if (LayerMask.GetMask() == LayerMask.NameToLayer("Environment"))
+			radius = radius * transform.parent.parent.localScale.x;
 
 		currentHitDistance = maxDistance;
 		m_Connections.Clear();
@@ -59,7 +72,9 @@ public class Node : MonoBehaviour
 		foreach (RaycastHit hit in hits)
 		{
 			Node hitNode = hit.transform.GetComponent<Node>();
-			if (hitNode) m_Connections.Add(hitNode);
+			//Physics.IgnoreCollision(hitNode.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
+			if (hitNode)
+				m_Connections.Add(hitNode);
 			currentHitDistance = hit.distance;
 		}
 	}

@@ -25,6 +25,11 @@ public class Graph : MonoBehaviour
 		}
 	}
 
+    void Start()
+    {
+        //
+    }
+
     /// <summary>
     /// Gets the shortest path from the starting Node to the ending Node.
     /// </summary>
@@ -37,16 +42,16 @@ public class Graph : MonoBehaviour
 		// We don't accept null arguments
 		if (start == null || end == null)
 		{
-			throw new ArgumentNullException ();
+			throw new ArgumentNullException();
 		}
 		
 		// The final path
-		Pathfinding path = new Pathfinding ();
+		Pathfinding path = new Pathfinding();
 
 		// If the start and end are same node, we can return the start node
 		if (start == end)
 		{
-			path.nodes.Add (start);
+			path.nodes.Add(start);
 			return path;
 		}
 		
@@ -120,6 +125,7 @@ public class Graph : MonoBehaviour
 				}
 			}
 		}
+
 		path.Bake();
 		return path;
 	}

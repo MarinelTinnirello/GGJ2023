@@ -23,6 +23,9 @@ public enum GameOverState
     Lose,
     BadScore,
     AwayTimeOut,
+    CarDamaged,
+    OutOfBounds,
+    EmptyTank,
     Win
 }
 
@@ -228,4 +231,18 @@ public enum RenderMode
     WorldSpace,
     Billboard,
     ScreenSpaceOverlay
+}
+
+public enum CarStates
+{
+    Idle,
+    Moving,
+    Boosting
+}
+
+public enum CarGasTankStates
+{
+    EmptyTank,
+    LowFuel,
+    HasFuel
 }

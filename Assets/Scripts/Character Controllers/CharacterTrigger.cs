@@ -17,6 +17,8 @@ public class CharacterTrigger : MonoBehaviour
     [HideInInspector]
     public MovementType characterRenderType = MovementType.is3D;
 
+    public bool inputEnabled = true;
+
     [Header("Character Display Settings")]
     public CharacterAnimationController characterAnimationController;
     public GameObject defaultDisplayObject;
@@ -89,14 +91,16 @@ public class CharacterTrigger : MonoBehaviour
     public Vector3 velocity;
 
     [HideInInspector]
-    public bool isRunning, attackCalled, isAttacking, isKnockedOut, wasJustHit, gameOverCalled, isBlocking, isMoving, wasMoving;
+    public bool isRunning, attackCalled, isAttacking, isKnockedOut, wasJustHit, gameOverCalled, isBlocking, isMoving, wasMoving, waitingForEventEnd;
 
     [HideInInspector]
     public float lastTime;
 
     public virtual void Start()
     {
+        characterEffects?.AssignCharacterController(this);
         characterAnimationController?.SetCharacterInputController(this);
+
         healthBar?.SetParentTransform(transform);
         healthBar?.SetMaxHealth(maxHealth);
 
@@ -136,6 +140,11 @@ public class CharacterTrigger : MonoBehaviour
         lastTime = _time;
 
         //UpdateAnimator(_dt);
+    }
+
+    public virtual void InputActiveState(bool state)
+    {
+        inputEnabled = state;
     }
 
     public virtual void SetCharacterRenderType(MovementType renderType)
@@ -374,6 +383,7 @@ public class CharacterTrigger : MonoBehaviour
 
     public virtual void OnGameOver(GameOverState gameOverState, bool playerWon = false)
     {
+        characterEffects?.OnCallGameOver(gameOverState, playerWon);
         gameOverCalled = true;
     }
 

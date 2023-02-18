@@ -34,8 +34,6 @@ public class CharacterInputController : CharacterTrigger
     
     private bool isDashing;
 
-    private bool inputEnabled = true;
-
     public override void Start()
     {
         if (!characterAnimationController) characterAnimationController = GetComponent<CharacterAnimationController>();
@@ -200,11 +198,6 @@ public class CharacterInputController : CharacterTrigger
         {
             GameManager.Instance?.OnPlayerReleaseAttackButton();
         }
-    }
-
-    public void InputActiveState(bool state)
-    {
-        inputEnabled = state;
     }
 
     public void StartPowerChangeTimer(float delayStartTime = 8.0f, float repeatTime = 10.0f)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7513504585586580089}
   - component: {fileID: 7513504585586580088}
   - component: {fileID: 8504977757332649733}
+  - component: {fileID: 6367811546657509760}
   m_Layer: 0
   m_Name: ObjectiveMarker
   m_TagString: Untagged
@@ -110,3 +111,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rect: {fileID: 0}
   path: {fileID: 5861103517252214362, guid: dc3d67c00c11b7d43810ed64cdee041c, type: 3}
+--- !u!114 &6367811546657509760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7513504585586580090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f691a233afc89c54798d6332a99450e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Connections: []
+  origin: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
+  radius: 10
+  maxDistance: 0.1
+  mask:
+    serializedVersion: 2
+    m_Bits: 2048

@@ -33,6 +33,10 @@ public class DeliveryWaypoint : MonoBehaviour
     float indicatorBorderSize = 10f;
     [SerializeField]
     float metersAway = 15f;
+    [SerializeField]
+    Pathfinding m_Path = new Pathfinding();
+    [SerializeField]
+    Graph m_Graph;
 
     NavMeshTriangulation Triangulation;
     Coroutine DrawPathCoroutine;
@@ -112,8 +116,8 @@ public class DeliveryWaypoint : MonoBehaviour
     {
         RectTransform rect = Instantiate(markerPrefab, minimap).GetComponent<RectTransform>();
         sender.rect = rect;
-        //LineRenderer path = Instantiate(sender.path, sender.transform).GetComponent<LineRenderer>();
-        //sender.path = path;
+        LineRenderer path = Instantiate(sender.path, sender.transform).GetComponent<LineRenderer>();
+        sender.path = path;
         waypoints.Add(sender);
         sender.rect.gameObject.SetActive(false);
     }
@@ -127,7 +131,7 @@ public class DeliveryWaypoint : MonoBehaviour
         //Destroy(foundObj.rect.gameObject);
         //Destroy(foundObj.path.gameObject);
         foundObj.rect.gameObject.SetActive(false);
-        //foundObj.path.gameObject.SetActive(false);
+        foundObj.path.gameObject.SetActive(false);
         waypoints.Remove(foundObj);
 
         if (waypoints.Count != 0)
@@ -175,6 +179,8 @@ public class DeliveryWaypoint : MonoBehaviour
 
         CheckIfOnScreen();
         CheckDistance();
+
+        m_Path = m_Graph.GetShortestPath(player.gameObject.GetComponent<Node>(), ActiveInstance.gameObject.GetComponent<Node>());
     }
 
     void RotateIndicator()

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-/// <summary>
-/// The Path.
-/// </summary>
 public class Pathfinding
 {
 
@@ -45,7 +42,7 @@ public class Pathfinding
 
 	/// <summary>
 	/// Bake the path.
-	/// Making the path ready for usage, Such as caculating the length.
+	/// Making the path ready for usage, Such as calculating the length.
 	/// </summary>
 	public virtual void Bake()
 	{
@@ -77,12 +74,12 @@ public class Pathfinding
 	/// <filterpriority>2</filterpriority>
 	public override string ToString()
 	{
-		return string.Format (
+		return string.Format(
 			"Nodes: {0}\nLength: {1}",
 			string.Join (
 				", ",
-				nodes.Select (node => node.name).ToArray()),
-			length );
+				nodes.Select(node => node.name).ToArray()),
+			length);
 	}
 	
 }

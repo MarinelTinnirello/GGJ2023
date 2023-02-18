@@ -37,6 +37,7 @@ public class CameraRig : MonoBehaviour
     public Transform zoomContainer;
     public float minZoom = 2.5f;
     public float maxZoom = 10f;
+    public bool autoZoomOnPan = true;
 
     private readonly float zoomLimiter = 10f;
     private readonly float zoomOffset = 15f;
@@ -45,6 +46,9 @@ public class CameraRig : MonoBehaviour
     private Transform lockedFocalPoint;
     private Vector3 velocity;
     private Vector3 zoomVelocity;
+
+    private Tween zoomTween;
+    private bool isDoingEventZoom, eventZoomOverride;
 
     [Header("General Settings")]
     public Camera mainCamera;
@@ -184,8 +188,22 @@ public class CameraRig : MonoBehaviour
         speedLines.SetActive(_state);
     }
 
+    public void DoEventZoom(float _zoomAmount, float _time = 0.5f, Ease _ease = Ease.OutBack, bool _overrideZoomSettings = true)
+    {
+        if (!zoomContainer) return;
+
+        zoomTween.Kill();
+        zoomTween = zoomContainer.transform.DOLocalMoveZ(_zoomAmount, _time).SetEase(_ease);
+
+        eventZoomOverride = _overrideZoomSettings;
+
+        //isDoingEventZoom = true;
+    }
+
     private void SetZoomLevel()
     {
+        if (!autoZoomOnPan || isDoingEventZoom && eventZoomOverride) return;
+
         float newZoom = isLockedToFocalPoint ? maxZoom : Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / zoomLimiter);
         zoomContainer.transform.localPosition = Vector3.SmoothDamp(zoomContainer.transform.localPosition, new Vector3(zoomContainer.transform.localPosition.x, zoomContainer.transform.localPosition.y, newZoom - zoomOffset), ref zoomVelocity, !isLockedToFocalPoint ? 0.1f : 0.5f);
     }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using DG.Tweening;
+
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(CharacterAnimationController))]
 public class CarController : CharacterTrigger
@@ -19,7 +21,12 @@ public class CarController : CharacterTrigger
     public bool canJump = true;
     private float dashAmmount = 1f;
     public bool runIsSticky;
-    
+    private Tween moveToGasPump;
+
+    [Header("Car Status")]
+    public CarStates currentCarState = CarStates.Idle;
+    public CarGasTankStates gasTank = CarGasTankStates.HasFuel;
+
     private float horizontal;
     private float vertical;
 
@@ -34,13 +41,7 @@ public class CarController : CharacterTrigger
      
     private float changePowerTime = 10f;
 
-    private bool jumpCalled;
-
-    private bool isDashing;
-
-    private bool inputEnabled = true;
-
-    private bool moveInit;
+    private bool jumpCalled, isDashing, refillInProgress, moveInit;
 
     public override void Start()
     {
@@ -82,9 +83,9 @@ public class CarController : CharacterTrigger
 
         CheckGroundState();
 
-        if (isBlocking)
+        if (isBlocking || refillInProgress)
         {
-            horizontal = vertical = 0f;
+            horizontal = vertical = refillInProgress? 1f : 0f;
             isMoving = false;
         }
 
@@ -123,8 +124,14 @@ public class CarController : CharacterTrigger
             characterAnimationController?.SetSpeed(moveSpeed * 0.1f);
         }
 
-        characterAnimationController?.Movement(horizontal, vertical, true);
-
+        if(gasTank == CarGasTankStates.EmptyTank)
+        {
+            characterAnimationController?.Movement(0f, 0f, true);
+        } else
+        {
+            characterAnimationController?.Movement(horizontal, vertical, true);
+        }
+        
         velocity.y += gravity * Time.deltaTime;
         characterController?.Move(velocity * Time.deltaTime);
 
@@ -141,49 +148,17 @@ public class CarController : CharacterTrigger
         base.Update();
 
         characterEffects?.EnableDustTrail(isMoving && isGrounded);
-    }
 
-    public void OnCameraChange(float cameraAngle)
-    {
-        characterAnimationController?.SetFloat("CameraAngle", cameraAngle);
-    }
-
-    public Vector3 MovementInput
-    {
-        get { return CameraRelativeInput(horizontal, vertical); }
-    }
-
-    private Vector3 CameraRelativeInput(float inputX, float inputZ)
-    {
-        Vector3 forward = mainCamera.transform.TransformDirection(Vector3.forward);
-        forward.y = 0;
-        forward = forward.normalized;
-
-        Vector3 right = new Vector3(forward.z, 0, -forward.x);
-        Vector3 relativeVelocity = horizontal * right + vertical * forward;
-
-        if (relativeVelocity.magnitude > 1) { relativeVelocity.Normalize(); }
-
-        return relativeVelocity;
-    }
-    private void RotateTowardsMovementDir()
-    {
-        if (MovementInput != Vector3.zero)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MovementInput), Time.deltaTime * rotationSpeed);
-            //transform.rotation = new Quaternion(0f, transform.rotation.y + (horizontal * 1f), 0f, transform.eulerAngles.magnitude);
-            //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y+(horizontal * 1f), 0);
-        }
-    }
-    private void RotateTowardsTarget(Vector3 targetPosition)
-    {
-        Quaternion targetRotation = Quaternion.LookRotation(targetPosition - new Vector3(transform.position.x, 0, transform.position.z));
-        transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetRotation.eulerAngles.y, (rotationSpeed * Time.deltaTime) * rotationSpeed);
+        UpdateCarStatus();
     }
 
     private void GetInputKeys()
     {
-        if (!inputEnabled) return;
+        if (!inputEnabled || refillInProgress || gasTank == CarGasTankStates.EmptyTank)
+        {
+            isMoving = false;
+            return;
+        }
 
         if (Input.GetButtonUp("StartGamePad"))
         {
@@ -206,12 +181,14 @@ public class CarController : CharacterTrigger
 
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKey(KeyCode.LeftShift))
         {
-            isRunning = runIsSticky? true : isMoving;
+            isRunning = runIsSticky ? true : isMoving;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isRunning = false;
         }
+
+        if (gasTank == CarGasTankStates.LowFuel || gasTank == CarGasTankStates.EmptyTank) isRunning = false;
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -233,12 +210,13 @@ public class CarController : CharacterTrigger
             {
                 horizontal = prevHorizontal;
                 vertical = prevVertical;
-            } else
+            }
+            else
             {
                 direction = Vector3.zero;
             }
         }
-        else if(isMoving)
+        else if (isMoving)
         {
             prevHorizontal = horizontal;
             prevVertical = vertical;
@@ -247,9 +225,99 @@ public class CarController : CharacterTrigger
         }
     }
 
-    public void InputActiveState(bool state)
+    public Vector3 MovementInput
     {
-        inputEnabled = state;
+        get { return CameraRelativeInput(horizontal, vertical); }
+    }
+    private Vector3 CameraRelativeInput(float inputX, float inputZ)
+    {
+        Vector3 forward = mainCamera.transform.TransformDirection(Vector3.forward);
+        forward.y = 0;
+        forward = forward.normalized;
+
+        Vector3 right = new Vector3(forward.z, 0, -forward.x);
+        Vector3 relativeVelocity = horizontal * right + vertical * forward;
+
+        if (relativeVelocity.magnitude > 1) { relativeVelocity.Normalize(); }
+
+        return relativeVelocity;
+    }
+
+    private void RotateTowardsMovementDir()
+    {
+        if (MovementInput != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MovementInput), Time.deltaTime * rotationSpeed);
+            //transform.rotation = new Quaternion(0f, transform.rotation.y + (horizontal * 1f), 0f, transform.eulerAngles.magnitude);
+            //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y+(horizontal * 1f), 0);
+        }
+    }
+
+    private void RotateTowardsTarget(Vector3 targetPosition)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(targetPosition - new Vector3(transform.position.x, 0, transform.position.z));
+        transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetRotation.eulerAngles.y, (rotationSpeed * Time.deltaTime) * rotationSpeed);
+    }
+
+    private void UpdateCarStatus()
+    {
+        if (isRunning)
+        {
+            currentCarState = CarStates.Boosting;
+        }
+        else if (isMoving)
+        {
+            currentCarState = CarStates.Moving;
+        }
+        else
+        {
+            currentCarState = CarStates.Idle;
+        }
+
+        GameManager.Instance?.UpdateCarState(currentCarState);
+    }
+
+    public void UpdateGasTank(CarGasTankStates _state)
+    {
+        gasTank = _state;
+
+        characterSoundEffects?.EnableLowFuelSound(gasTank == CarGasTankStates.LowFuel);
+    }
+
+    public void RefillTank(float _time = 4.0f, float _delay = 0.0f, GasPump _currentPump = null)
+    {
+        if (refillInProgress || gasTank == CarGasTankStates.EmptyTank) return;
+
+        OnRefillProgressChange(true);
+
+        if (_currentPump)
+        {
+            if (_currentPump.dockingPoint)
+            {
+                moveToGasPump.Kill();
+                moveToGasPump = transform.DOMove(_currentPump.dockingPoint.transform.position, .5f);
+            }
+
+            _currentPump?.ActivatePump(true);
+        }
+
+        GameManager.Instance?.UIManager?.gasMeter?.RefillTank(_time, _delay);
+    }
+
+    public void OnRefillComplete()
+    {
+        OnRefillProgressChange(false);
+    }
+
+    private void OnRefillProgressChange(bool _isRefilling = true)
+    {
+        characterAnimationController?.IsRefueling(_isRefilling);
+        refillInProgress = waitingForEventEnd = _isRefilling;
+    }
+
+    public void OnCameraChange(float cameraAngle)
+    {
+        characterAnimationController?.SetFloat("CameraAngle", cameraAngle);
     }
 
     public void StartPowerChangeTimer(float delayStartTime = 8.0f, float repeatTime = 10.0f)
