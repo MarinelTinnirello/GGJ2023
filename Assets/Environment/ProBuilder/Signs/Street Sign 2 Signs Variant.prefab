@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3469379944601067767, guid: 1dde68aad67eb654eb41ef148657fc09, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 253630aab4168c341b222bf8de913d4a, type: 2}
     - target: {fileID: 3469379945498501931, guid: 1dde68aad67eb654eb41ef148657fc09, type: 3}
       propertyPath: m_Name
       value: Street Sign 2 Signs Variant
@@ -259,6 +263,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8842391817846588273, guid: 1dde68aad67eb654eb41ef148657fc09, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 253630aab4168c341b222bf8de913d4a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dde68aad67eb654eb41ef148657fc09, type: 3}
 --- !u!4 &277843136853096882 stripped
